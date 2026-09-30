@@ -250,10 +250,14 @@
         class="border-y border-canvas-border bg-canvas-surface/60 py-4 px-4 sm:px-8 text-xs font-semibold tracking-wider uppercase text-neutral-500">
         <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-                <span class="text-tailored-royal font-bold">El Protocolo de Selección</span> <span>•</span> <span>I.
-                    Entrevista Bioquímica</span> <span>II. Cartografía de Notas</span> <span>III. Elixir
-                    Definitivo</span>
+                <span class="text-tailored-royal font-bold">EL PROTOCOLO DE SELECCIÓN</span> <span>•</span> <span>I.
+                    ENTREVISTA BIOQUÍMICA</span> <span>II. CARTOGRAFÍA DE NOTAS</span> <span>III. ELIXIR
+                    DEFINITIVO</span>
             </div>
+            <a href="#metodologia"
+                class="text-tailored-royal hover:text-tailored-accent transition-colors font-bold flex items-center gap-1">
+                DESCUBRE LA METODOLOGÍA ↓
+            </a>
         </div>
     </section>
 
@@ -344,6 +348,52 @@
             </div>
         </div>
     </section>
+
+    <!-- BANNER FINAL PRE-FOOTER (CALL TO ACTION) -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-8 py-20">
+        <div
+            class="bg-gradient-to-r from-noir to-tailored-deep rounded-3xl p-8 sm:p-14 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl relative overflow-hidden fade-up">
+            <div class="relative z-10 max-w-xl">
+                <span class="text-xs font-bold uppercase tracking-widest text-tailored-light/70 mb-2 block">ACCESO
+                    EXCLUSIVO Y PRIVADO</span>
+                <h3 class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-3">
+                    ¿Listo para encontrar tu signatura olfativa definitiva?
+                </h3>
+                <p class="text-neutral-300 text-sm leading-relaxed">
+                    Permite que nuestro sommelier evalúe tus preferencias táctiles, memorias y características dérmicas
+                    en una consulta digital de alta precisión.
+                </p>
+            </div>
+            <button onclick="openSommelierModal()"
+                class="relative z-10 px-8 py-4 rounded-full bg-white text-tailored-deep hover:bg-canvas-surface active:scale-95 font-extrabold text-sm uppercase tracking-wider transition-all duration-200 shadow-xl flex-shrink-0 flex items-center gap-3">
+                <span>Iniciar Sesión con el Sommelier</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- FOOTER EDITORIAL -->
+    <footer class="border-t border-canvas-border py-12 px-4 sm:px-8 bg-canvas text-xs text-neutral-500">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="flex flex-col sm:flex-row items-center gap-3">
+                <span class="font-extrabold text-neutral-900 tracking-wider">TOUCHE ESSENCIELLE</span>
+                <span class="hidden sm:inline">•</span>
+                <span>Sincelejo, Sucre, Colombia</span>
+                <span class="hidden sm:inline">•</span>
+                <span>&copy; 2025. Todos los derechos reservados.</span>
+            </div>
+            <div class="flex items-center gap-6 font-semibold uppercase tracking-wider">
+                <a href="https://instagram.com/touchessencielle_" target="_blank" rel="noopener noreferrer"
+                    class="hover:text-tailored-accent transition-colors">INSTAGRAM</a>
+                <a href="#metodologia" class="hover:text-tailored-accent transition-colors">DIAGNÓSTICO</a>
+                <a href="https://wa.me/573145892537" target="_blank" rel="noopener noreferrer"
+                    class="hover:text-tailored-accent transition-colors">WHATSAPP DIRECTO</a>
+            </div>
+        </div>
+    </footer>
 
     <!-- MODAL INMERSIVO -->
     <div id="sommelier-modal"
