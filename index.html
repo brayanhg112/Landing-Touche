@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Touche Essencielle — Alta Perfumería de Inspiración & Alquimia Cutánea</title>
+    <title>Touche Essencielle | Descubre Tu Perfume Ideal</title>
 
     <!-- Tipografía Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,7 +35,7 @@
         }
     </script>
     <style>
-        /* Efecto Antigravedad Flotante */
+        /* Animaciones base */
         @keyframes float {
 
             0%,
@@ -54,10 +54,32 @@
             animation: float 6s ease-in-out infinite;
         }
 
-        /* Scroll Reveal Fade-Up */
+        @keyframes mist-float {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-120px) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .spray-drop {
+            position: absolute;
+            background: radial-gradient(circle, rgba(237, 233, 254, 0.9) 0%, rgba(109, 40, 217, 0) 70%);
+            border-radius: 50%;
+            animation: mist-float infinite ease-in;
+        }
+
         .fade-up {
             opacity: 0;
-            transform: translateY(24px);
+            transform: translateY(30px);
             transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: opacity, transform;
         }
@@ -67,7 +89,6 @@
             transform: translateY(0);
         }
 
-        /* Ocultar barra de scroll en modales */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -76,26 +97,47 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        .accordion-content {
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+
+        .accordion-content.open {
+            max-height: 500px;
+            opacity: 1;
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-icon.open {
+            transform: rotate(180deg);
+        }
     </style>
 </head>
 
 <body
-    class="bg-canvas text-neutral-900 font-sans antialiased selection:bg-tailored-accent selection:text-white relative min-h-screen">
+    class="bg-canvas text-neutral-900 font-sans antialiased selection:bg-tailored-accent selection:text-white relative min-h-screen overflow-x-hidden">
 
-    <!-- TOP BAR / SUB-HEADER EDITORIAL -->
-    <aside
-        class="border-b border-canvas-border/80 bg-white/70 backdrop-blur-md sticky top-0 z-40 text-xs py-2.5 px-4 sm:px-8">
-        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-neutral-500">
-            <div class="flex items-center gap-2 tracking-wider uppercase font-semibold text-[10px] text-tailored-royal">
-                <span class="inline-block w-1.5 h-1.5 rounded-full bg-tailored-accent animate-pulse"></span>
-                01 // ALTA CONSULTORÍA • LECTURA DE CARÁCTER & ALQUIMIA CUTÁNEA
+    <!-- TOP BAR -->
+    <aside class="bg-tailored-deep text-white sticky top-0 z-50 py-2.5 px-4 sm:px-8 shadow-md">
+        <div
+            class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-[10px] sm:text-[11px] font-bold tracking-widest uppercase">
+            <div class="flex items-center gap-1.5 opacity-90">
+                <span>📍 Ciudad de Sincelejo, Sucre</span>
+                <span class="text-tailored-accent/60 mx-1 hidden sm:inline">|</span>
+                <span class="hidden sm:inline">Envíos Nacionales</span>
             </div>
-            <div class="flex items-center gap-6 text-[11px]">
+            <div class="flex items-center">
                 <a href="https://instagram.com/touchessencielle_" target="_blank" rel="noopener noreferrer"
-                    class="hover:text-tailored-accent transition-colors flex items-center gap-1 font-medium">
-                    INSTAGRAM: @touchessencielle_
-                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    class="hover:text-tailored-light transition-colors flex items-center gap-1.5 font-black text-white drop-shadow-sm">
+                    INSTAGRAM: @TOUCHESSENCIELLE_
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                             d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
                 </a>
@@ -104,66 +146,54 @@
     </aside>
 
     <!-- NAVEGACIÓN PRINCIPAL -->
-    <header class="max-w-7xl mx-auto px-4 sm:px-8 py-5 flex items-center justify-between">
-        <div class="flex flex-col">
-            <a href="#" class="text-xl sm:text-2xl font-black tracking-tight flex items-center gap-2 text-neutral-950">
-                <span class="w-2.5 h-2.5 rounded-full bg-tailored-accent"></span>
+    <header class="max-w-7xl mx-auto px-4 sm:px-8 py-6 flex items-center justify-between fade-up relative z-40">
+        <div class="flex flex-col flex-shrink-0">
+            <a href="#"
+                class="text-2xl md:text-3xl lg:text-4xl font-black tracking-tighter flex items-center gap-3 text-neutral-950 hover:text-tailored-deep transition-colors">
+                <span class="w-2.5 h-2.5 rounded-full bg-tailored-accent shadow-[0_0_15px_rgba(109,40,217,0.5)]"></span>
                 TOUCHE ESSENCIELLE
             </a>
-            <span class="text-xs text-neutral-500 font-medium tracking-wide flex items-center gap-1 mt-0.5">
-                📍 Ciudad de Sincelejo, Sucre <span class="text-neutral-300">|</span> Envíos Nacionales
-            </span>
         </div>
-        <nav class="hidden md:flex items-center gap-8 text-xs font-semibold uppercase tracking-wider text-neutral-600">
-            <a href="#metodologia" class="hover:text-tailored-accent transition-colors">Diagnóstico Olfativo</a>
-            <div class="relative group">
-                <button class="hover:text-tailored-accent transition-colors flex items-center gap-1 uppercase">
-                    Química de Piel
-                    <svg class="w-3.5 h-3.5 text-neutral-400 group-hover:rotate-180 transition-transform duration-200"
-                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </button>
-                <div
-                    class="absolute left-0 mt-2 w-72 p-4 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-canvas-border opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
-                    <p class="text-[11px] font-bold text-tailored-royal uppercase tracking-wider mb-1">Termorregulación
-                        & pH</p>
-                    <p class="text-xs text-neutral-600 normal-case leading-relaxed font-normal">
-                        El calor caribeño de Sincelejo acelera la evaporación del alcohol. Formulamos con aceites puros
-                        al 38% para crear una fijación dérmica inquebrantable.
-                    </p>
-                </div>
-            </div>
+        <nav class="hidden lg:flex items-center gap-8 text-xs font-bold uppercase tracking-widest text-neutral-500">
+            <a href="#diagnostico" class="hover:text-tailored-accent transition-colors">Diagnóstico Olfativo</a>
             <a href="#experiencia" class="hover:text-tailored-accent transition-colors">Experiencia & Reseñas</a>
         </nav>
-        <a href="https://wa.me/573145892537" target="_blank" rel="noopener noreferrer"
-            class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full border border-tailored-royal/20 text-tailored-royal hover:bg-tailored-royal hover:text-white transition-all duration-200 text-xs font-bold tracking-wider active:scale-95">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
-            Consulta en Directo Disponible
-        </a>
+        <div class="hidden sm:block flex-shrink-0">
+            <a href="https://wa.me/573145892537" target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-tailored-royal/20 text-tailored-royal hover:bg-tailored-royal hover:text-white transition-all duration-300 text-xs font-bold tracking-wider active:scale-95 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+                Consulta en Directo
+            </a>
+        </div>
     </header>
 
     <!-- HERO SECTION -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-8 pt-8 pb-20 lg:pt-14 lg:pb-28">
+    <section class="max-w-7xl mx-auto px-4 sm:px-8 pt-8 pb-16 lg:pt-14 lg:pb-24">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
             <div class="lg:col-span-7 flex flex-col items-start fade-up">
                 <div
-                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900 text-white text-[11px] font-bold uppercase tracking-wider mb-6">
+                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900 text-white text-[10px] font-bold uppercase tracking-wider mb-6">
                     <span>CERO AZAR OLFATIVO</span> <span class="text-neutral-400">•</span> <span
                         class="text-tailored-light">Boutique Privada en Sincelejo</span>
                 </div>
                 <h1
-                    class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-neutral-950 tracking-tight leading-[1.1] mb-6">
-                    “No me gustaría que adquieras algo con lo que no te sientas 100% seguro. <span
-                        class="bg-gradient-to-r from-tailored-royal to-tailored-accent bg-clip-text text-transparent underline decoration-tailored-royal/30">Déjame
+                    class="text-4xl sm:text-5xl lg:text-6xl font-black text-neutral-950 tracking-tight leading-[1.1] mb-8">
+                    “Me gustaría que adquieras algo con lo que te sientas 100% seguro.<br>
+                    <span
+                        class="text-tailored-accent underline decoration-tailored-accent/30 decoration-4 underline-offset-4">Déjame
                         buscar lo ideal para ti.</span>”
                 </h1>
-                <p class="text-base sm:text-lg text-neutral-600 leading-relaxed font-normal mb-8 max-w-2xl">
-                    Tenemos una baraja inmensa de referencias, pero no dejamos tu elección al azar. Conocemos la ciencia
-                    detrás de cada gota: entendemos lo que buscas, cómo reacciona la química de tu piel y lo que quieres
-                    proyectar hoy. Te entregamos la fragancia exacta que hablará por ti antes de que digas una sola
-                    palabra.
-                </p>
+                <div class="text-base sm:text-lg text-neutral-600 leading-relaxed font-medium mb-10 max-w-2xl">
+                    <p class="mb-5">
+                        Tenemos una baraja inmensa de referencias, pero no dejamos tu elección al azar. Conocemos la
+                        ciencia detrás de cada gota: entendemos lo que buscas, cómo reacciona la química de tu piel y lo
+                        que quieres proyectar hoy.
+                    </p>
+                    <p
+                        class="font-bold italic text-neutral-900 text-lg sm:text-xl border-l-4 border-tailored-accent pl-4 py-1">
+                        Te entregamos la fragancia exacta que hablará por ti antes de que digas una sola palabra.
+                    </p>
+                </div>
                 <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto mb-12">
                     <button onclick="openSommelierModal()"
                         class="px-8 py-4 rounded-full bg-gradient-to-r from-tailored-deep to-tailored-accent text-white font-bold text-sm tracking-wider uppercase shadow-luxury hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-3">
@@ -183,33 +213,30 @@
                     <div>
                         <div class="text-2xl sm:text-3xl font-extrabold text-neutral-950">96%</div>
                         <div class="text-[11px] font-semibold tracking-wider text-neutral-400 uppercase mt-0.5">
-                            Precisión de Afinamiento</div>
+                            Precisión</div>
                     </div>
                     <div>
                         <div class="text-2xl sm:text-3xl font-extrabold text-neutral-950">1 a 1</div>
                         <div class="text-[11px] font-semibold tracking-wider text-neutral-400 uppercase mt-0.5">Sesión
-                            Confidencial</div>
+                            Privada</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Visual 3D Antigravedad con Video -->
             <div class="lg:col-span-5 flex flex-col items-center relative fade-up">
                 <div
-                    class="relative w-full max-w-md aspect-[4/5] rounded-3xl p-6 bg-gradient-to-b from-canvas-surface to-white border border-canvas-border shadow-2xl flex items-center justify-center overflow-hidden">
+                    class="relative w-full max-w-md aspect-[4/5] rounded-[2rem] p-4 bg-gradient-to-b from-canvas-surface to-white border border-canvas-border shadow-2xl flex items-center justify-center overflow-hidden">
                     <div
                         class="absolute top-4 left-4 z-20 flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/80 backdrop-blur-md border border-neutral-200 text-[10px] font-bold text-neutral-800 uppercase tracking-widest">
-                        <span class="w-1.5 h-1.5 rounded-full bg-tailored-accent"></span> Sincelejo Atelier — En Vivo
+                        <span class="w-1.5 h-1.5 rounded-full bg-tailored-accent animate-pulse"></span> Sincelejo
+                        Atelier
                     </div>
-
-                    <!-- AQUÍ ESTÁ EL VIDEO 3D FLOTANDO -->
                     <div class="animate-float relative z-10 w-full flex items-center justify-center">
                         <video autoplay loop muted playsinline
                             class="w-[300px] sm:w-[400px] object-cover rounded-3xl mix-blend-multiply drop-shadow-2xl">
                             <source src="assets/animacion-hero.mp4" type="video/mp4">
                         </video>
                     </div>
-
                     <div
                         class="absolute bottom-5 inset-x-5 z-20 bg-white/85 backdrop-blur-md rounded-2xl p-4 border border-white/60 shadow-floating">
                         <div class="flex items-center justify-between mb-2">
@@ -217,27 +244,15 @@
                                 class="text-[10px] font-extrabold text-tailored-deep uppercase tracking-wider flex items-center gap-1">
                                 <span class="w-1.5 h-1.5 rounded-full bg-tailored-accent"></span> Perfumes en Tendencia
                             </span>
-                            <div class="flex gap-1" id="hero-carousel-dots">
-                                <span
-                                    class="w-1.5 h-1.5 rounded-full bg-tailored-accent transition-all duration-300"></span>
-                                <span
-                                    class="w-1.5 h-1.5 rounded-full bg-neutral-300 transition-all duration-300"></span>
-                                <span
-                                    class="w-1.5 h-1.5 rounded-full bg-neutral-300 transition-all duration-300"></span>
-                            </div>
                         </div>
                         <div class="flex items-center justify-between gap-3">
-                            <div id="hero-carousel-content" class="min-h-[38px]">
-                                <h4 class="text-sm font-bold text-neutral-900 transition-all duration-300">Naxos 1861
-                                </h4>
-                                <p
-                                    class="text-xs text-neutral-500 font-normal truncate max-w-[210px] transition-all duration-300">
-                                    Miel silvestre, Tabaco dulce, Bergamota de Calabria</p>
+                            <div class="min-h-[38px]">
+                                <h4 class="text-sm font-bold text-neutral-900">Baccarat Rouge 540</h4>
+                                <p class="text-xs text-neutral-500 font-normal truncate max-w-[210px]">Jazmín, Azafrán,
+                                    Ámbar gris</p>
                             </div>
                             <button onclick="openSommelierModal()"
-                                class="px-3 py-1.5 bg-tailored-deep text-white rounded-lg text-xs font-bold uppercase hover:bg-tailored-accent transition-colors active:scale-95 flex-shrink-0">
-                                Ver
-                            </button>
+                                class="px-3 py-1.5 bg-tailored-deep text-white rounded-lg text-xs font-bold uppercase hover:bg-tailored-accent transition-colors active:scale-95 flex-shrink-0">Ver</button>
                         </div>
                     </div>
                 </div>
@@ -245,227 +260,1246 @@
         </div>
     </section>
 
-    <!-- PROTOCOLO DE SELECCIÓN ANCLA -->
-    <section
-        class="border-y border-canvas-border bg-canvas-surface/60 py-4 px-4 sm:px-8 text-xs font-semibold tracking-wider uppercase text-neutral-500">
-        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-                <span class="text-tailored-royal font-bold">EL PROTOCOLO DE SELECCIÓN</span> <span>•</span> <span>I.
-                    ENTREVISTA BIOQUÍMICA</span> <span>II. CARTOGRAFÍA DE NOTAS</span> <span>III. ELIXIR
-                    DEFINITIVO</span>
-            </div>
-            <a href="#metodologia"
-                class="text-tailored-royal hover:text-tailored-accent transition-colors font-bold flex items-center gap-1">
-                DESCUBRE LA METODOLOGÍA ↓
-            </a>
-        </div>
-    </section>
-
-    <!-- SECCIÓN METODOLOGÍA & PILARES -->
-    <section id="metodologia" class="max-w-7xl mx-auto px-4 sm:px-8 py-20 lg:py-28">
-        <div class="max-w-3xl mb-16 fade-up">
-            <div class="text-xs font-extrabold uppercase tracking-widest text-tailored-royal mb-2">PERFUMERÍA
-                INTELIGENTE // SIN RUIDO</div>
-            <h2 class="text-2xl sm:text-4xl font-extrabold text-neutral-950 tracking-tight leading-tight mb-4">¿Por qué
-                tu perfume ideal no se elige en una vitrina cualquiera?</h2>
-            <p class="text-neutral-600 text-base leading-relaxed">
-                Olvídate del alcohol que se evapora en minutos. En Touche Essencielle trabajamos con perfumería de
-                inspiración (calidad 1:1) a base de aceites de altísima concentración. Al tener una base oleosa pura, la
-                fragancia se funde con tu piel, resiste el calor de nuestra ciudad y garantiza una fijación extrema.
-            </p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-            <article
-                class="bg-white rounded-3xl p-8 border border-canvas-border shadow-card-soft hover:shadow-xl hover:border-tailored-accent/30 transition-all duration-300 flex flex-col justify-between fade-up">
-                <div>
-                    <span class="text-xs font-mono text-neutral-400">01 / PIEL Y CLIMA</span>
-                    <h3 class="text-xl font-bold text-neutral-950 mt-4 mb-3">Tu Química Manda</h3>
-                    <p class="text-neutral-600 text-sm leading-relaxed mb-6">El perfume no reacciona igual en todos. Si
-                        tu piel es seca, absorbe rápido; si es grasa, proyecta. Cruzamos estos datos para darte una
-                        fragancia que se adapte a tu química y no te abandone a las dos horas.</p>
-                </div>
-            </article>
-            <article
-                class="bg-noir rounded-3xl p-8 border border-noir-border shadow-2xl text-white flex flex-col justify-between fade-up md:-translate-y-3">
-                <div>
-                    <span class="text-xs font-mono text-tailored-light/60">02 / ESTELA EXTREMA</span>
-                    <h3 class="text-xl font-bold text-white mt-4 mb-3">Perdurabilidad Sin Compromiso</h3>
-                    <p class="text-neutral-300 text-sm leading-relaxed mb-6 font-light">Trabajamos composiciones densas,
-                        donde la estela persiste en el ambiente horas después de tu partida, susurrando autoridad.</p>
-                </div>
-            </article>
-            <article
-                class="bg-white rounded-3xl p-8 border border-canvas-border shadow-card-soft hover:shadow-xl hover:border-tailored-accent/30 transition-all duration-300 flex flex-col justify-between fade-up">
-                <div>
-                    <span class="text-xs font-mono text-neutral-400">03 / CALIDAD SIN COMPROMISO</span>
-                    <h3 class="text-xl font-bold text-neutral-950 mt-4 mb-3">Filtro de Excelencia</h3>
-                    <p class="text-neutral-600 text-sm leading-relaxed mb-6">No nos casamos con un solo laboratorio.
-                        Filtramos y testeamos entre múltiples proveedores para asegurarnos de que la fragancia tenga la
-                        máxima fidelidad olfativa del mercado.</p>
-                </div>
-            </article>
-        </div>
-    </section>
-
-    <!-- LA EXPERIENCIA (MAPA & RESEÑAS) -->
-    <section id="experiencia" class="bg-noir text-white py-24 px-4 sm:px-8">
-        <div class="max-w-7xl mx-auto">
-            <div class="max-w-3xl mb-16 fade-up">
-                <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4">La Experiencia Touche Essencielle
-                </h2>
-                <p class="text-neutral-400 text-base leading-relaxed">Un refugio íntimo de alta perfumería en la capital
-                    de Sucre. Diagnóstico personalizado, prueba directa sobre la piel y despacho asegurado a toda
-                    Colombia.</p>
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-                <div class="lg:col-span-6 bg-noir-card rounded-3xl p-3 sm:p-4 border border-noir-border fade-up">
-                    <div
-                        class="w-full h-[380px] sm:h-[420px] rounded-2xl overflow-hidden relative border border-noir-border/50">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3937.2831555315674!2d-75.39000381300673!3d9.308159466952338!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e59158ac4b009eb%3A0x45cce6c4cb0b0524!2sPerfumeria%20Touche%20Essencielle!5e0!3m2!1ses-419!2sco!4v1790800308264!5m2!1ses-419!2sco"
-                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                    </div>
-                </div>
-                <div class="lg:col-span-6 flex flex-col justify-between gap-6 fade-up">
-                    <div
-                        class="bg-noir-card rounded-3xl p-6 sm:p-8 border border-noir-border flex items-center justify-between">
-                        <div>
-                            <div class="flex items-baseline gap-3"><span
-                                    class="text-4xl sm:text-5xl font-black">5.0</span>
-                                <div class="text-amber-400 text-lg">★★★★★</div>
-                            </div>
-                            <p class="text-xs text-neutral-400 mt-1">Basado en valoraciones de Sincelejo</p>
-                        </div>
-                    </div>
-                    <div id="dynamic-reviews-container" class="flex flex-col gap-4 flex-grow justify-center"></div>
-                    <div class="flex items-center justify-between text-xs text-neutral-400 px-2 pt-2">
-                        <button onclick="renderRandomReviews()"
-                            class="px-4 py-2 rounded-full bg-noir-card hover:bg-neutral-800 border border-noir-border text-white font-semibold active:scale-95">
-                            Barajar Testimonios
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- BANNER FINAL PRE-FOOTER (CALL TO ACTION) -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-8 py-20">
+    <!-- FRANJA CONCEPTO -->
+    <section class="border-y border-canvas-border bg-canvas-surface py-5 px-4 sm:px-8 fade-up">
         <div
-            class="bg-gradient-to-r from-noir to-tailored-deep rounded-3xl p-8 sm:p-14 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl relative overflow-hidden fade-up">
-            <div class="relative z-10 max-w-xl">
-                <span class="text-xs font-bold uppercase tracking-widest text-tailored-light/70 mb-2 block">ACCESO
-                    EXCLUSIVO Y PRIVADO</span>
-                <h3 class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-3">
-                    ¿Listo para encontrar tu signatura olfativa definitiva?
-                </h3>
-                <p class="text-neutral-300 text-sm leading-relaxed">
-                    Permite que nuestro sommelier evalúe tus preferencias táctiles, memorias y características dérmicas
-                    en una consulta digital de alta precisión.
+            class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+            <div class="text-[11px] sm:text-xs font-black text-noir uppercase tracking-widest">
+                NO SE TRATA SOLO DE OLER BIEN. SE TRATA DE CÓMO QUIERES SER RECORDADO.
+            </div>
+            <div
+                class="flex flex-wrap justify-center gap-4 sm:gap-6 text-[10px] sm:text-xs text-tailored-royal font-bold uppercase tracking-wider">
+                <span class="flex items-center gap-1.5"><span class="w-1 h-1 bg-tailored-accent rounded-full"></span>
+                    Personal para ti</span>
+                <span class="flex items-center gap-1.5"><span class="w-1 h-1 bg-tailored-accent rounded-full"></span>
+                    Pensado para tu piel</span>
+                <span class="flex items-center gap-1.5"><span class="w-1 h-1 bg-tailored-accent rounded-full"></span>
+                    Selección 1 a 1</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- EL PROBLEMA -->
+    <section
+        class="py-32 bg-noir text-white relative overflow-hidden flex items-center min-h-[60vh] border-y border-neutral-900">
+        <div
+            class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-tailored-deep/30 via-noir to-noir opacity-80">
+        </div>
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[600px] md:h-[600px] bg-tailored-accent/15 rounded-full blur-[100px] animate-pulse pointer-events-none">
+        </div>
+
+        <!-- Gotitas de Atomizador -->
+        <div class="absolute inset-0 pointer-events-none z-0">
+            <div class="spray-drop w-3 h-3 left-[15%] top-[80%]" style="animation-duration: 6s; animation-delay: 0s;">
+            </div>
+            <div class="spray-drop w-1.5 h-1.5 left-[25%] top-[90%]"
+                style="animation-duration: 4s; animation-delay: 1.5s;"></div>
+            <div class="spray-drop w-4 h-4 left-[45%] top-[85%]" style="animation-duration: 7s; animation-delay: 0.5s;">
+            </div>
+            <div class="spray-drop w-2 h-2 left-[65%] top-[75%]" style="animation-duration: 5s; animation-delay: 2s;">
+            </div>
+            <div class="spray-drop w-3 h-3 left-[85%] top-[90%]" style="animation-duration: 6.5s; animation-delay: 1s;">
+            </div>
+            <div class="spray-drop w-1 h-1 left-[95%] top-[80%]"
+                style="animation-duration: 3.5s; animation-delay: 0.2s;"></div>
+            <div class="spray-drop w-2 h-2 left-[50%] top-[95%]" style="animation-duration: 5.5s; animation-delay: 3s;">
+            </div>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-6 text-center relative z-10 w-full">
+            <h2
+                class="text-3xl md:text-5xl lg:text-6xl font-black mb-10 leading-tight tracking-tight flex flex-col gap-2 md:gap-4 max-w-5xl mx-auto">
+                <span class="fade-up block">Encontrar un perfume que huela bien&nbsp;es&nbsp;fácil.</span>
+                <span class="fade-up block text-tailored-light" style="transition-delay: 200ms;">Encontrar uno que se
+                    sienta como tú <span class="text-tailored-accent">es&nbsp;otra&nbsp;historia.</span></span>
+            </h2>
+            <p class="fade-up text-lg md:text-xl text-neutral-400 font-light leading-relaxed mb-12 max-w-4xl mx-auto"
+                style="transition-delay: 400ms;">
+                Has comprado perfumes por moda, solo para descubrir que en tu piel cambian, desaparecen rápido o
+                simplemente no dicen nada de ti. Elegir una fragancia por popularidad es dejar una decisión personal al
+                azar. <strong class="text-white font-semibold tracking-wide">Tu presencia merece más que una
+                    tendencia.</strong>
+            </p>
+            <div class="fade-up" style="transition-delay: 600ms;">
+                <button onclick="openSommelierModal()"
+                    class="px-10 py-5 rounded-full bg-white text-noir font-black text-xs sm:text-sm tracking-widest uppercase hover:bg-neutral-200 transition-all active:scale-95 shadow-[0_0_40px_rgba(255,255,255,0.15)] hover:shadow-[0_0_60px_rgba(109,40,217,0.4)]">
+                    QUIERO DESCUBRIR EL MÍO
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ASPIRACIÓN E IDENTIDAD (Tarjetas de Fichas Técnicas) -->
+    <section class="py-24 bg-canvas fade-up">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-black text-noir mb-4 tracking-tight">¿Cómo quieres que te
+                    recuerden?</h2>
+                <p class="text-neutral-500 text-lg">Selecciona la vibra que más te representa y te recomendaremos la
+                    fragancia ideal.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 1. Magnetismo -->
+                <button onclick="openQuickRec('magnetismo')"
+                    class="group text-left w-full bg-white p-8 rounded-3xl shadow-card-soft border border-canvas-border hover:shadow-2xl hover:border-tailored-accent hover:-translate-y-1 transition-all duration-300 flex flex-col h-full relative overflow-hidden">
+                    <div
+                        class="absolute top-0 right-0 w-24 h-24 bg-tailored-royal/5 rounded-bl-full pointer-events-none group-hover:bg-tailored-royal/10 transition-colors">
+                    </div>
+                    <div
+                        class="text-[10px] text-tailored-royal font-bold uppercase tracking-widest mb-2 flex items-center justify-between w-full">
+                        PERSONALIDAD
+                        <svg class="w-4 h-4 text-tailored-accent/30 group-hover:text-tailored-accent transition-colors"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-black text-noir mb-3 group-hover:text-tailored-deep transition-colors">
+                        Magnetismo</h3>
+                    <p class="text-neutral-600 font-light text-sm mb-6 flex-grow">Quiero una fragancia envolvente y
+                        cálida que invite a acercarse y deje una estela inolvidable.</p>
+                    <div
+                        class="text-xs font-bold text-tailored-deep uppercase tracking-wider flex items-center gap-2 mt-auto">
+                        👁️ Ver Recomendación</div>
+                </button>
+
+                <!-- 2. Elegante -->
+                <button onclick="openQuickRec('elegante')"
+                    class="group text-left w-full bg-white p-8 rounded-3xl shadow-card-soft border border-canvas-border hover:shadow-2xl hover:border-tailored-accent hover:-translate-y-1 transition-all duration-300 flex flex-col h-full relative overflow-hidden">
+                    <div
+                        class="absolute top-0 right-0 w-24 h-24 bg-tailored-royal/5 rounded-bl-full pointer-events-none group-hover:bg-tailored-royal/10 transition-colors">
+                    </div>
+                    <div
+                        class="text-[10px] text-tailored-royal font-bold uppercase tracking-widest mb-2 flex items-center justify-between w-full">
+                        PERSONALIDAD
+                        <svg class="w-4 h-4 text-tailored-accent/30 group-hover:text-tailored-accent transition-colors"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-black text-noir mb-3 group-hover:text-tailored-deep transition-colors">
+                        Elegante</h3>
+                    <p class="text-neutral-600 font-light text-sm mb-6 flex-grow">Quiero transmitir sofisticación
+                        impecable sin exagerar. Maderas finas, flores limpias y presencia pulcra.</p>
+                    <div
+                        class="text-xs font-bold text-tailored-deep uppercase tracking-wider flex items-center gap-2 mt-auto">
+                        👁️ Ver Recomendación</div>
+                </button>
+
+                <!-- 3. Imponente -->
+                <button onclick="openQuickRec('imponente')"
+                    class="group text-left w-full bg-white p-8 rounded-3xl shadow-card-soft border border-canvas-border hover:shadow-2xl hover:border-tailored-accent hover:-translate-y-1 transition-all duration-300 flex flex-col h-full relative overflow-hidden">
+                    <div
+                        class="absolute top-0 right-0 w-24 h-24 bg-tailored-royal/5 rounded-bl-full pointer-events-none group-hover:bg-tailored-royal/10 transition-colors">
+                    </div>
+                    <div
+                        class="text-[10px] text-tailored-royal font-bold uppercase tracking-widest mb-2 flex items-center justify-between w-full">
+                        PERSONALIDAD
+                        <svg class="w-4 h-4 text-tailored-accent/30 group-hover:text-tailored-accent transition-colors"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-black text-noir mb-3 group-hover:text-tailored-deep transition-colors">
+                        Imponente</h3>
+                    <p class="text-neutral-600 font-light text-sm mb-6 flex-grow">Quiero que mi presencia se note con
+                        autoridad. Notas densas y estructuradas que imponen respeto al instante.</p>
+                    <div
+                        class="text-xs font-bold text-tailored-deep uppercase tracking-wider flex items-center gap-2 mt-auto">
+                        👁️ Ver Recomendación</div>
+                </button>
+
+                <!-- 4. Vibrante -->
+                <button onclick="openQuickRec('vibrante')"
+                    class="group text-left w-full bg-white p-8 rounded-3xl shadow-card-soft border border-canvas-border hover:shadow-2xl hover:border-tailored-accent hover:-translate-y-1 transition-all duration-300 flex flex-col h-full relative overflow-hidden">
+                    <div
+                        class="absolute top-0 right-0 w-24 h-24 bg-tailored-royal/5 rounded-bl-full pointer-events-none group-hover:bg-tailored-royal/10 transition-colors">
+                    </div>
+                    <div
+                        class="text-[10px] text-tailored-royal font-bold uppercase tracking-widest mb-2 flex items-center justify-between w-full">
+                        PERSONALIDAD
+                        <svg class="w-4 h-4 text-tailored-accent/30 group-hover:text-tailored-accent transition-colors"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-black text-noir mb-3 group-hover:text-tailored-deep transition-colors">
+                        Vibrante</h3>
+                    <p class="text-neutral-600 font-light text-sm mb-6 flex-grow">Quiero sentir limpieza, energía y
+                        ligereza en el calor. Cítricos radiantes y dinamismo absoluto para el día a día.</p>
+                    <div
+                        class="text-xs font-bold text-tailored-deep uppercase tracking-wider flex items-center gap-2 mt-auto">
+                        👁️ Ver Recomendación</div>
+                </button>
+
+                <!-- 5. Sensual -->
+                <button onclick="openQuickRec('sensual')"
+                    class="group text-left w-full bg-white p-8 rounded-3xl shadow-card-soft border border-canvas-border hover:shadow-2xl hover:border-tailored-accent hover:-translate-y-1 transition-all duration-300 flex flex-col h-full relative overflow-hidden">
+                    <div
+                        class="absolute top-0 right-0 w-24 h-24 bg-tailored-royal/5 rounded-bl-full pointer-events-none group-hover:bg-tailored-royal/10 transition-colors">
+                    </div>
+                    <div
+                        class="text-[10px] text-tailored-royal font-bold uppercase tracking-widest mb-2 flex items-center justify-between w-full">
+                        PERSONALIDAD
+                        <svg class="w-4 h-4 text-tailored-accent/30 group-hover:text-tailored-accent transition-colors"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-black text-noir mb-3 group-hover:text-tailored-deep transition-colors">
+                        Sensual</h3>
+                    <p class="text-neutral-600 font-light text-sm mb-6 flex-grow">Quiero una fragancia íntima y
+                        profunda. Creada para las distancias cortas y las memorias que perduran en el tiempo.</p>
+                    <div
+                        class="text-xs font-bold text-tailored-deep uppercase tracking-wider flex items-center gap-2 mt-auto">
+                        👁️ Ver Recomendación</div>
+                </button>
+
+                <!-- 6. Diferente -->
+                <button onclick="openQuickRec('diferente')"
+                    class="group text-left w-full bg-white p-8 rounded-3xl shadow-card-soft border border-canvas-border hover:shadow-2xl hover:border-tailored-accent hover:-translate-y-1 transition-all duration-300 flex flex-col h-full relative overflow-hidden">
+                    <div
+                        class="absolute top-0 right-0 w-24 h-24 bg-tailored-royal/5 rounded-bl-full pointer-events-none group-hover:bg-tailored-royal/10 transition-colors">
+                    </div>
+                    <div
+                        class="text-[10px] text-tailored-royal font-bold uppercase tracking-widest mb-2 flex items-center justify-between w-full">
+                        PERSONALIDAD
+                        <svg class="w-4 h-4 text-tailored-accent/30 group-hover:text-tailored-accent transition-colors"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-black text-noir mb-3 group-hover:text-tailored-deep transition-colors">
+                        Diferente</h3>
+                    <p class="text-neutral-600 font-light text-sm mb-6 flex-grow">No quiero oler como todo el mundo.
+                        Mezclas inusuales e ingredientes exóticos para quienes prefieren ser una rareza.</p>
+                    <div
+                        class="text-xs font-bold text-tailored-deep uppercase tracking-wider flex items-center gap-2 mt-auto">
+                        👁️ Ver Recomendación</div>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- LABORATORIO OLFATIVO SIMÉTRICO (3 COLUMNAS LIMPIAS) -->
+    <!-- ======================================================== -->
+    <section id="diagnostico" class="py-24 bg-noir text-white relative overflow-hidden border-y border-neutral-900">
+        <!-- Fondos y luces Base -->
+        <div
+            class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-tailored-royal/10 via-noir to-noir opacity-90 pointer-events-none">
+        </div>
+
+        <!-- Glow dinámico central -->
+        <div id="glow-effect"
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-tailored-accent/20 rounded-full blur-[100px] transition-all duration-1000 pointer-events-none opacity-40 mix-blend-screen">
+        </div>
+
+        <!-- Partículas Estelares (CSS Background) -->
+        <div class="absolute inset-0 pointer-events-none"
+            style="background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 50px 50px; opacity: 0.3; mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%); -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);">
+        </div>
+
+        <!-- Contenedor para Flares Interactivos -->
+        <div id="flare-container" class="absolute inset-0 pointer-events-none z-40 overflow-hidden"></div>
+
+        <div class="relative z-30 text-center mb-10 px-4 max-w-2xl mx-auto">
+            <div
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold uppercase tracking-widest text-tailored-light mb-3 backdrop-blur-sm shadow-[0_0_15px_rgba(255,255,255,0.05)]">
+                <span
+                    class="w-1.5 h-1.5 rounded-full bg-tailored-accent animate-pulse shadow-[0_0_10px_rgba(109,40,217,0.8)]"></span>
+                <span id="lab-phase-badge">Laboratorio Olfativo</span>
+            </div>
+            <h2 id="lab-question"
+                class="text-3xl md:text-4xl font-black tracking-tight drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)] transition-all duration-500">
+                Iniciando sistema...</h2>
+        </div>
+
+        <!-- Arena Central Estructurada (3 Columnas) -->
+        <div
+            class="relative w-full max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-center gap-6 md:gap-16 px-6 z-20">
+
+            <!-- Opciones Izquierda -->
+            <div id="options-left"
+                class="w-full md:w-1/3 flex flex-row md:flex-col flex-wrap justify-center gap-4 items-center md:items-end order-2 md:order-1 min-h-[100px] transition-opacity duration-300">
+            </div>
+
+            <!-- Botella Central Premium -->
+            <div
+                class="relative w-36 h-56 md:w-48 md:h-72 flex flex-col items-center drop-shadow-[0_30px_60px_rgba(0,0,0,0.9)] order-1 md:order-2 z-30 group">
+                <div
+                    class="absolute inset-0 bg-tailored-accent/10 blur-[40px] rounded-full group-hover:bg-tailored-accent/20 transition-all duration-700">
+                </div>
+
+                <!-- Tapa -->
+                <div
+                    class="w-16 h-12 md:w-20 md:h-14 bg-gradient-to-b from-neutral-200 via-white to-neutral-400 rounded-t-lg rounded-b-xl shadow-[0_10px_20px_rgba(0,0,0,0.5)] z-20 border-b-2 border-neutral-500 overflow-hidden relative">
+                    <div class="absolute inset-y-0 left-3 w-1.5 md:w-2 bg-white/80 blur-[1px]"></div>
+                    <div class="absolute inset-y-0 right-3 w-1 bg-black/10 blur-[1px]"></div>
+                </div>
+                <!-- Cuello -->
+                <div class="w-8 h-4 md:w-8 md:h-5 bg-gradient-to-b from-neutral-300 to-neutral-600 z-10 shadow-inner">
+                </div>
+
+                <!-- Cuerpo (Glassmorphism Pro) -->
+                <div
+                    class="w-full h-full relative rounded-[2rem] md:rounded-[3rem] border-4 md:border-[6px] border-white/10 bg-white/5 backdrop-blur-xl shadow-[inset_0_0_40px_rgba(255,255,255,0.15)] overflow-hidden flex items-end">
+                    <div class="absolute top-0 inset-x-4 h-1 bg-white/30 blur-[2px] rounded-full"></div>
+
+                    <!-- LÍQUIDO -->
+                    <div id="liquid-fill"
+                        class="w-full bg-gradient-to-t from-tailored-deep via-tailored-accent to-[#C084FC] transition-all duration-[1200ms] ease-in-out flex items-center justify-center shadow-[inset_0_15px_30px_rgba(0,0,0,0.6)] relative overflow-hidden"
+                        style="height: 0%;">
+                        <div
+                            class="absolute top-0 w-[200%] h-6 bg-white/10 rounded-[100%] blur-[3px] transform -translate-y-1/2">
+                        </div>
+                        <div
+                            class="absolute top-1 w-[150%] h-2 bg-white/20 rounded-full blur-[1px] transform -translate-x-4">
+                        </div>
+                        <div class="absolute bottom-2 left-4 w-1 h-1 bg-white/40 rounded-full blur-[0.5px]"></div>
+                        <div class="absolute bottom-6 right-6 w-1.5 h-1.5 bg-white/30 rounded-full blur-[0.5px]"></div>
+                        <div class="absolute bottom-10 left-1/2 w-0.5 h-0.5 bg-white/50 rounded-full blur-[0.5px]">
+                        </div>
+                    </div>
+                </div>
+                <!-- Reflejo Frontal y Porcentaje -->
+                <div
+                    class="absolute top-[60%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-black text-2xl md:text-3xl text-white tracking-widest drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] z-30 flex items-center">
+                    <span id="fill-percentage">0</span><span class="text-lg md:text-xl text-white/80">%</span>
+                </div>
+                <div
+                    class="absolute top-[70px] left-4 md:left-6 w-3 md:w-5 h-24 md:h-32 bg-gradient-to-r from-white/30 to-transparent rounded-full blur-[2px] pointer-events-none z-20 transform -rotate-2">
+                </div>
+                <div
+                    class="absolute bottom-[30px] right-4 md:right-6 w-2 md:w-3 h-16 md:h-20 bg-gradient-to-l from-white/10 to-transparent rounded-full blur-[2px] pointer-events-none z-20 transform rotate-2">
+                </div>
+            </div>
+
+            <!-- Opciones Derecha -->
+            <div id="options-right"
+                class="w-full md:w-1/3 flex flex-row md:flex-col flex-wrap justify-center gap-4 items-center md:items-start order-3 min-h-[100px] transition-opacity duration-300">
+            </div>
+
+            <!-- Tarjeta Final Absoluta -->
+            <div id="final-card"
+                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 bg-noir/90 backdrop-blur-2xl border border-white/10 p-8 rounded-[2.5rem] shadow-[0_30px_60px_rgba(0,0,0,0.8)] w-[90%] max-w-sm text-center opacity-0 pointer-events-none transition-all duration-700 scale-95 flex flex-col items-center">
+                <div
+                    class="absolute top-12 left-1/2 -translate-x-1/2 w-24 h-24 bg-emerald-500/30 blur-[30px] rounded-full pointer-events-none">
+                </div>
+                <div
+                    class="relative w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mb-4 border border-emerald-500/50 shadow-[0_0_20px_rgba(16,185,129,0.3)]">
+                    <svg class="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7">
+                        </path>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-black text-white mb-2 drop-shadow-md">Fórmula Lista</h3>
+                <p class="text-neutral-400 text-sm font-light mb-6">Hemos procesado tu ADN olfativo. Hablemos para
+                    entregarte la fragancia exacta.</p>
+                <div id="whatsapp-btn-container" class="w-full pointer-events-auto"></div>
+                <button onclick="resetLab()"
+                    class="text-neutral-500 text-xs font-bold uppercase tracking-widest mt-6 hover:text-white transition-colors pointer-events-auto flex items-center gap-2 mx-auto">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                        </path>
+                    </svg>
+                    Crear nueva fórmula
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- EL MÉTODO TOUCHÉ -->
+    <section class="py-24 bg-canvas overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-16 fade-up">
+                <h2 class="text-3xl md:text-5xl font-black text-noir mb-4 tracking-tight">No elegimos por moda.
+                    Analizamos.</h2>
+                <p class="text-neutral-500 text-lg">Nuestro proceso combina tus preferencias, la ocasión de uso y tu
+                    química corporal.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Paso 1 -->
+                <div class="relative pt-6 border-t-2 border-noir/10 fade-up" style="transition-delay: 100ms;">
+                    <div class="text-6xl font-black text-canvas-border absolute -top-8 -left-2 z-0 pointer-events-none">
+                        01</div>
+                    <h4 class="relative z-10 text-lg font-bold text-noir mb-2">Te conocemos</h4>
+                    <p class="relative z-10 text-neutral-600 text-sm font-light">Tu historia primero. Qué disfrutas, qué
+                        detestas y qué quieres transmitir. Recomendar a ciegas es adivinar.</p>
+                </div>
+                <!-- Paso 2 -->
+                <div class="relative pt-6 border-t-2 border-noir/10 fade-up" style="transition-delay: 300ms;">
+                    <div class="text-6xl font-black text-canvas-border absolute -top-8 -left-2 z-0 pointer-events-none">
+                        02</div>
+                    <h4 class="relative z-10 text-lg font-bold text-noir mb-2">Afinamos</h4>
+                    <p class="relative z-10 text-neutral-600 text-sm font-light">Reducimos cientos de posibilidades
+                        concentrándonos en alta fidelidad y desempeño. Menos ruido, más intención.</p>
+                </div>
+                <!-- Paso 3 -->
+                <div class="relative pt-6 border-t-2 border-noir/10 fade-up" style="transition-delay: 500ms;">
+                    <div class="text-6xl font-black text-canvas-border absolute -top-8 -left-2 z-0 pointer-events-none">
+                        03</div>
+                    <h4 class="relative z-10 text-lg font-bold text-noir mb-2">Probamos</h4>
+                    <p class="relative z-10 text-neutral-600 text-sm font-light">La prueba final ocurre en tu piel.
+                        Analizamos cómo el calor y tu pH modifican la evolución de la fragancia.</p>
+                </div>
+                <!-- Paso 4 -->
+                <div class="relative pt-6 border-t-2 border-noir/10 fade-up" style="transition-delay: 700ms;">
+                    <div class="text-6xl font-black text-canvas-border absolute -top-8 -left-2 z-0 pointer-events-none">
+                        04</div>
+                    <h4 class="relative z-10 text-lg font-bold text-tailored-accent mb-2">Encuentras tu perfume</h4>
+                    <p class="relative z-10 text-neutral-600 text-sm font-light">Ese momento en que dices: "Este sí soy
+                        yo". Una fragancia que realmente quieras hacer parte de ti.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- EL ASESOR & PRUEBA SOCIAL (CARRUSEL REAL) -->
+    <section class="py-24 bg-canvas fade-up overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-5xl font-black text-noir mb-4 tracking-tight">No tendrás que elegir solo.
+                </h2>
+                <p class="text-neutral-500 text-lg max-w-2xl mx-auto">La mejor explicación de Touche Essencielle la dan
+                    quienes ya encontraron su firma olfativa.</p>
+            </div>
+
+            <!-- Sommelier Quote -->
+            <div
+                class="bg-noir text-white rounded-[3rem] p-8 md:p-12 shadow-[0_20px_40px_rgba(0,0,0,0.2)] mb-16 relative overflow-hidden flex flex-col md:flex-row items-center gap-8 max-w-5xl mx-auto">
+                <div
+                    class="absolute top-0 right-0 w-64 h-64 bg-tailored-royal/30 rounded-full blur-[80px] pointer-events-none">
+                </div>
+                <div class="relative z-10 w-full text-center md:text-left">
+                    <p class="text-xl md:text-3xl font-light italic mb-6 leading-relaxed text-neutral-300">
+                        "Antes de recomendarte una fragancia quiero saber quién eres, qué aromas disfrutas y qué quieres
+                        transmitir. Porque recomendar un perfume debería parecerse menos a vender y mucho más a
+                        escuchar."
+                    </p>
+                    <p class="font-bold text-sm uppercase tracking-widest text-tailored-accent">Sommelier Touche
+                        Essencielle</p>
+                </div>
+            </div>
+
+            <!-- Carrusel de Reseñas -->
+            <div class="relative max-w-6xl mx-auto">
+                <!-- Controles -->
+                <div class="absolute top-1/2 -left-4 md:-left-12 transform -translate-y-1/2 z-10 hidden md:block">
+                    <button onclick="scrollReviews('left')"
+                        class="w-12 h-12 bg-noir rounded-full shadow-[0_10px_20px_rgba(0,0,0,0.15)] flex items-center justify-center text-white hover:bg-tailored-deep hover:shadow-[0_10px_20px_rgba(59,7,100,0.3)] transition-all duration-300 active:scale-95 border border-white/10 group">
+                        <svg class="w-6 h-6 group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="absolute top-1/2 -right-4 md:-right-12 transform -translate-y-1/2 z-10 hidden md:block">
+                    <button onclick="scrollReviews('right')"
+                        class="w-12 h-12 bg-noir rounded-full shadow-[0_10px_20px_rgba(0,0,0,0.15)] flex items-center justify-center text-white hover:bg-tailored-deep hover:shadow-[0_10px_20px_rgba(59,7,100,0.3)] transition-all duration-300 active:scale-95 border border-white/10 group">
+                        <svg class="w-6 h-6 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Contenedor Scrollable -->
+                <div id="reviews-carousel"
+                    class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 pt-4 px-4 -mx-4 no-scrollbar scroll-smooth">
+
+                    <!-- Reseña Real 1 (Lizz Castro) -->
+                    <div
+                        class="snap-center shrink-0 w-[85%] md:w-[45%] lg:w-[30%] bg-white p-8 rounded-3xl shadow-card-soft border border-canvas-border flex flex-col hover:shadow-xl transition-shadow relative group fade-up" style="transition-delay: 100ms;">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex text-amber-400 text-lg">★★★★★</div>
+                            <!-- ENLACE A GOOGLE MAPS -->
+                            <a href="https://maps.app.goo.gl/yoBBnW9zEDjMTWva9" target="_blank"
+                                class="flex items-center gap-1.5 text-[10px] font-bold text-neutral-500 hover:text-blue-600 uppercase tracking-widest bg-canvas hover:bg-blue-50 px-3 py-1.5 rounded-full transition-all border border-canvas-border hover:border-blue-200">
+                                <span class="text-blue-600 font-black text-xs">G</span> Ver original
+                            </a>
+                        </div>
+                        <p class="text-neutral-700 italic mb-6 text-sm leading-relaxed flex-grow">"Me encanta touche, es
+                            mi perfumería favorita, el dueño es amable y muy asertivo, me ha ayudado a descubrir los
+                            aromas con los que me siento identificada y me encanta que los perfumes demoran
+                            muchisimo❤️✨"</p>
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-8 h-8 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-xs uppercase">
+                                L</div>
+                            <div>
+                                <div class="font-bold text-noir text-sm">Lizz Castro</div>
+                                <div class="text-xs text-neutral-400">Hace 6 meses</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reseña Real 2 (carlos daniel burgos perez) -->
+                    <div
+                        class="snap-center shrink-0 w-[85%] md:w-[45%] lg:w-[30%] bg-white p-8 rounded-3xl shadow-card-soft border border-canvas-border flex flex-col hover:shadow-xl transition-shadow relative group fade-up" style="transition-delay: 200ms;">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex text-amber-400 text-lg">★★★★★</div>
+                            <!-- ENLACE A GOOGLE MAPS -->
+                            <a href="https://maps.app.goo.gl/KozeG1Cid2vFWQDG9" target="_blank"
+                                class="flex items-center gap-1.5 text-[10px] font-bold text-neutral-500 hover:text-blue-600 uppercase tracking-widest bg-canvas hover:bg-blue-50 px-3 py-1.5 rounded-full transition-all border border-canvas-border hover:border-blue-200">
+                                <span class="text-blue-600 font-black text-xs">G</span> Ver original
+                            </a>
+                        </div>
+                        <p class="text-neutral-700 italic mb-6 text-sm leading-relaxed flex-grow">"La mejor calidad que
+                            he encontrado en Sincelejo, duración de hasta más de 24 horas en la ropa y los cumplidos
+                            nunca paran"</p>
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-8 h-8 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-xs uppercase overflow-hidden">
+                                <img src="https://ui-avatars.com/api/?name=Carlos+Daniel&background=E2E8F0&color=334155"
+                                    alt="Carlos Daniel">
+                            </div>
+                            <div>
+                                <div class="font-bold text-noir text-sm">carlos daniel burgos perez</div>
+                                <div class="text-xs text-tailored-accent font-bold">Reseña Reciente</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reseña Real 3 (Diego Gomez) -->
+                    <div
+                        class="snap-center shrink-0 w-[85%] md:w-[45%] lg:w-[30%] bg-white p-8 rounded-3xl shadow-card-soft border border-canvas-border flex flex-col hover:shadow-xl transition-shadow relative group fade-up" style="transition-delay: 300ms;">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex text-amber-400 text-lg">★★★★★</div>
+                            <!-- ENLACE A GOOGLE MAPS -->
+                            <a href="https://maps.app.goo.gl/2siBeT4Jy6SS6Shc9" target="_blank"
+                                class="flex items-center gap-1.5 text-[10px] font-bold text-neutral-500 hover:text-blue-600 uppercase tracking-widest bg-canvas hover:bg-blue-50 px-3 py-1.5 rounded-full transition-all border border-canvas-border hover:border-blue-200">
+                                <span class="text-blue-600 font-black text-xs">G</span> Ver original
+                            </a>
+                        </div>
+                        <p class="text-neutral-700 italic mb-6 text-sm leading-relaxed flex-grow">"Una de las mejores
+                            experiencias que he tenido con perfumería, el aroma perdura por bastante tiempo, manejan
+                            buenas referencias y sobre todo, los precios son bastante asequibles para un estudiante"</p>
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs uppercase overflow-hidden">
+                                <img src="https://ui-avatars.com/api/?name=Diego+Gomez&background=DBEAFE&color=1D4ED8"
+                                    alt="Diego Gomez">
+                            </div>
+                            <div>
+                                <div class="font-bold text-noir text-sm">Diego Gomez</div>
+                                <div class="text-xs text-neutral-400">Local Guide</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reseña Real 4 (Laura Soto García) -->
+                    <div
+                        class="snap-center shrink-0 w-[85%] md:w-[45%] lg:w-[30%] bg-white p-8 rounded-3xl shadow-card-soft border border-canvas-border flex flex-col hover:shadow-xl transition-shadow relative group fade-up" style="transition-delay: 400ms;">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex text-amber-400 text-lg">★★★★★</div>
+                            <!-- ENLACE A GOOGLE MAPS -->
+                            <a href="https://maps.app.goo.gl/u3ygR4jSjkXekAn86" target="_blank"
+                                class="flex items-center gap-1.5 text-[10px] font-bold text-neutral-500 hover:text-blue-600 uppercase tracking-widest bg-canvas hover:bg-blue-50 px-3 py-1.5 rounded-full transition-all border border-canvas-border hover:border-blue-200">
+                                <span class="text-blue-600 font-black text-xs">G</span> Ver original
+                            </a>
+                        </div>
+                        <p class="text-neutral-700 italic mb-6 text-sm leading-relaxed flex-grow">"Tengo 3 perfumes
+                            desde hace 1 año... llegué a creer que su aroma ya no sería el mismo o que no durarían...
+                            Pero para mi sorpresa están como sí no les hubiera pasado el tiempo. Mi favorito es HAYA...
+                            Me encanta"</p>
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-8 h-8 rounded-full bg-pink-100 text-pink-700 flex items-center justify-center font-bold text-xs uppercase overflow-hidden">
+                                <img src="https://ui-avatars.com/api/?name=Laura+Soto&background=FCE7F3&color=BE185D"
+                                    alt="Laura Soto">
+                            </div>
+                            <div>
+                                <div class="font-bold text-noir text-sm">Laura Soto García</div>
+                                <div class="text-xs text-tailored-accent font-bold">Reseña con foto</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reseña Real 5 (Esteban Martinez) -->
+                    <div
+                        class="snap-center shrink-0 w-[85%] md:w-[45%] lg:w-[30%] bg-white p-8 rounded-3xl shadow-card-soft border border-canvas-border flex flex-col hover:shadow-xl transition-shadow relative group fade-up" style="transition-delay: 500ms;">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex text-amber-400 text-lg">★★★★★</div>
+                            <!-- ENLACE A GOOGLE MAPS -->
+                            <a href="https://maps.app.goo.gl/eaqrLwXnRw7va8k6A" target="_blank"
+                                class="flex items-center gap-1.5 text-[10px] font-bold text-neutral-500 hover:text-blue-600 uppercase tracking-widest bg-canvas hover:bg-blue-50 px-3 py-1.5 rounded-full transition-all border border-canvas-border hover:border-blue-200">
+                                <span class="text-blue-600 font-black text-xs">G</span> Ver original
+                            </a>
+                        </div>
+                        <p class="text-neutral-700 italic mb-6 text-sm leading-relaxed flex-grow">"De los mejores
+                            perfumes preparados, buen olor, duración y no mancha la ropa."</p>
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-8 h-8 rounded-full bg-orange-100 text-orange-700 flex items-center justify-center font-bold text-xs uppercase overflow-hidden">
+                                <img src="https://ui-avatars.com/api/?name=Esteban+Martinez&background=FFEDD5&color=C2410C"
+                                    alt="Esteban Martinez">
+                            </div>
+                            <div>
+                                <div class="font-bold text-noir text-sm">Esteban Martinez</div>
+                                <div class="text-xs text-neutral-400">Hace 18 horas</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reseña Real 6 (Sterling Hernandez) -->
+                    <div
+                        class="snap-center shrink-0 w-[85%] md:w-[45%] lg:w-[30%] bg-white p-8 rounded-3xl shadow-card-soft border border-canvas-border flex flex-col hover:shadow-xl transition-shadow relative group fade-up" style="transition-delay: 600ms;">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex text-amber-400 text-lg">★★★★★</div>
+                            <!-- ENLACE A GOOGLE MAPS -->
+                            <a href="https://maps.app.goo.gl/wdwMkYVg9QM5Lbg6A" target="_blank"
+                                class="flex items-center gap-1.5 text-[10px] font-bold text-neutral-500 hover:text-blue-600 uppercase tracking-widest bg-canvas hover:bg-blue-50 px-3 py-1.5 rounded-full transition-all border border-canvas-border hover:border-blue-200">
+                                <span class="text-blue-600 font-black text-xs">G</span> Ver original
+                            </a>
+                        </div>
+                        <p class="text-neutral-700 italic mb-6 text-sm leading-relaxed flex-grow">"Gracias a la
+                            excelente asesoría, pude encontrar mi perfume ideal. También venden ambientadores, mi
+                            habitación permanece con buen olor todo el día."</p>
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-8 h-8 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center font-bold text-xs uppercase">
+                                S</div>
+                            <div>
+                                <div class="font-bold text-noir text-sm">Sterling Hernandez</div>
+                                <div class="text-xs text-tailored-accent font-bold">Reseña con foto</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- CTA Mejorado -->
+            <div class="mt-8 text-center relative z-20">
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-20 bg-tailored-royal/5 blur-2xl rounded-full pointer-events-none"></div>
+                <a href="https://wa.me/573145892537?text=Hola,%20estoy%20listo%20para%20encontrar%20mi%20firma%20olfativa"
+                    target="_blank"
+                    class="inline-flex items-center gap-3 bg-noir text-white px-8 py-4 rounded-full font-black text-xs uppercase tracking-widest hover:bg-neutral-800 transition-all active:scale-95 shadow-luxury">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    HABLAR CON MI SOMMELIER AHORA
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCIA & MAPA (INTERACTIVO Y PREMIUM) -->
+    <section id="experiencia" class="py-24 bg-canvas-surface fade-up border-t border-canvas-border relative overflow-hidden">
+        <!-- Fondo decorativo sutil -->
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-canvas-border/50 to-transparent pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <!-- Header de sección -->
+            <div class="text-center mb-16 fade-up">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tailored-deep/5 border border-tailored-deep/10 text-[10px] font-bold uppercase tracking-widest text-tailored-deep mb-4">
+                    <span class="w-1.5 h-1.5 rounded-full bg-tailored-accent animate-pulse"></span> Boutique Física
+                </div>
+                <h2 class="text-3xl md:text-5xl font-black text-noir mb-4 tracking-tight drop-shadow-sm">Ven a descubrirlo sobre tu propia piel.</h2>
+                <p class="text-neutral-500 text-lg max-w-xl mx-auto font-light">Si estás en Sincelejo, vive el proceso de análisis olfativo de manera presencial en nuestro Atelier.</p>
+            </div>
+
+            <!-- Contenedor Maestro: Mapa + Overlay -->
+            <div class="relative max-w-5xl mx-auto group">
+                
+                <!-- Contenedor del Iframe con Efecto 3D -->
+                <div class="rounded-[2rem] overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.08)] bg-white border border-white/60 relative transform transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-[0_30px_60px_rgba(0,0,0,0.12)]">
+                    
+                    <!-- Tarjeta Flotante Informativa (Overlay) -->
+                    <div class="absolute top-6 right-6 z-20 bg-white/90 backdrop-blur-md p-5 rounded-2xl shadow-floating border border-white max-w-[240px] pointer-events-none hidden md:block fade-up" style="transition-delay: 200ms;">
+                        <div class="flex items-center gap-3 mb-2">
+                            <div class="w-8 h-8 rounded-full bg-tailored-deep/10 flex items-center justify-center text-tailored-accent">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+                            </div>
+                            <h4 class="font-bold text-sm text-noir">Touche Essencielle</h4>
+                        </div>
+                        <p class="text-xs text-neutral-500 font-medium">Cra. 33 #18-65<br>Sincelejo, Sucre, 700001</p>
+                    </div>
+
+                    <!-- Iframe del Mapa -->
+                    <div class="relative w-full h-[450px]">
+                        <!-- Capa de interacción inicial (para que no scrollee por accidente) -->
+                        <div class="absolute inset-0 bg-transparent z-10 group-hover:pointer-events-none transition-all duration-300"></div>
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3937.2831555315674!2d-75.39000381300673!3d9.308159466952338!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e59158ac4b009eb%3A0x45cce6c4cb0b0524!2sPerfumeria%20Touche%20Essencielle!5e0!3m2!1ses-419!2sco!4v1790800308264!5m2!1ses-419!2sco" 
+                            class="w-full h-full border-0 grayscale-[20%] contrast-125 hover:grayscale-0 transition-all duration-700" 
+                            allowfullscreen="" loading="lazy" title="Mapa de ubicación Perfumería Touche Essencielle">
+                        </iframe>
+                    </div>
+
+                    <!-- Botón flotante móvil (CÓMO LLEGAR) -->
+                    <a href="https://maps.app.goo.gl/yoBBnW9zEDjMTWva9" target="_blank" class="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 bg-noir text-white px-6 py-3 rounded-full font-bold text-[10px] uppercase tracking-widest shadow-luxury flex items-center gap-2 hover:scale-105 active:scale-95 transition-all md:hidden">
+                        <svg class="w-4 h-4 text-tailored-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        Cómo llegar
+                    </a>
+                </div>
+
+                <!-- Tarjeta Envíos Nacionales (Superpuesta al mapa) -->
+                <div class="bg-gradient-to-br from-tailored-deep to-[#2A004D] text-white p-8 md:p-10 rounded-[2rem] text-center max-w-3xl mx-auto shadow-[0_25px_50px_rgba(59,7,100,0.3)] border border-white/10 relative z-30 mt-[-60px] md:mt-[-80px] transform transition-transform hover:-translate-y-1 fade-up" style="transition-delay: 400ms;">
+                    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] opacity-50 pointer-events-none"></div>
+                    <h3 class="text-xl md:text-2xl font-black mb-3 relative z-10 drop-shadow-md">¿No estás en Sincelejo?</h3>
+                    <p class="text-sm font-light mb-8 text-tailored-light/90 relative z-10 max-w-xl mx-auto leading-relaxed">
+                        Realiza tu diagnóstico de manera digital. A partir de esa información podremos orientarte con envíos nacionales seguros y garantizados a toda Colombia.
+                    </p>
+                    <button onclick="openSommelierModal()" class="bg-white text-noir px-8 py-3.5 rounded-full font-black text-[10px] md:text-xs uppercase tracking-widest hover:bg-neutral-200 transition-all active:scale-95 inline-flex items-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.15)] relative z-10">
+                        <span class="w-1.5 h-1.5 rounded-full bg-tailored-accent animate-ping"></span>
+                        HACER MI DIAGNÓSTICO ONLINE
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-24 bg-canvas fade-up border-t border-canvas-border">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-black text-noir mb-12 text-center tracking-tight">Antes de elegir tu próximo perfume...</h2>
+            <div class="space-y-4">
+                <!-- Pregunta 1 -->
+                <div class="bg-white border border-canvas-border rounded-2xl overflow-hidden shadow-sm hover:border-tailored-accent/30 transition-colors duration-300">
+                    <button class="w-full px-6 py-5 text-left font-bold text-noir flex justify-between items-center focus:outline-none group" onclick="toggleAccordion(this)">
+                        <span class="group-hover:text-tailored-accent transition-colors">¿Necesito saber de perfumes para el diagnóstico?</span>
+                        <svg class="w-5 h-5 accordion-icon text-neutral-400 group-hover:text-tailored-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="accordion-content bg-canvas-surface px-6">
+                        <p class="py-5 text-neutral-600 text-sm font-light border-t border-canvas-border leading-relaxed">No. De hecho, es mejor si no tienes ideas preconcebidas. El diagnóstico está pensado para que puedas responder desde tus sensaciones, recuerdos, gustos cotidianos y las situaciones que vives, sin necesidad de conocer términos técnicos o notas olfativas complejas.</p>
+                    </div>
+                </div>
+                <!-- Pregunta 2 -->
+                <div class="bg-white border border-canvas-border rounded-2xl overflow-hidden shadow-sm hover:border-tailored-accent/30 transition-colors duration-300">
+                    <button class="w-full px-6 py-5 text-left font-bold text-noir flex justify-between items-center focus:outline-none group" onclick="toggleAccordion(this)">
+                        <span class="group-hover:text-tailored-accent transition-colors">¿Cuánto dura realmente la fragancia en mi piel?</span>
+                        <svg class="w-5 h-5 accordion-icon text-neutral-400 group-hover:text-tailored-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="accordion-content bg-canvas-surface px-6">
+                        <p class="py-5 text-neutral-600 text-sm font-light border-t border-canvas-border leading-relaxed">La duración (fijación) es relativa porque depende del pH de tu piel, tu nivel de hidratación y el clima. Sin embargo, en Touche Essencielle trabajamos con altas concentraciones de extractos y aceites puros (no agua perfumada), lo que garantiza un desempeño muy superior al estándar comercial, alcanzando fácilmente de 8 a 12 horas de estela perceptible.</p>
+                    </div>
+                </div>
+                <!-- Pregunta 3 -->
+                <div class="bg-white border border-canvas-border rounded-2xl overflow-hidden shadow-sm hover:border-tailored-accent/30 transition-colors duration-300">
+                    <button class="w-full px-6 py-5 text-left font-bold text-noir flex justify-between items-center focus:outline-none group" onclick="toggleAccordion(this)">
+                        <span class="group-hover:text-tailored-accent transition-colors">¿Qué pasa si no tengo claro qué aroma estoy buscando?</span>
+                        <svg class="w-5 h-5 accordion-icon text-neutral-400 group-hover:text-tailored-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="accordion-content bg-canvas-surface px-6">
+                        <p class="py-5 text-neutral-600 text-sm font-light border-t border-canvas-border leading-relaxed">Ese es precisamente el propósito central de nuestra asesoría. No esperamos que sepas lo que quieres oler; empezamos explorando lo que sí sabes: cómo te quieres sentir, qué impresión deseas dejar al entrar a una habitación y qué recuerdos quieres evocar. De traducir eso a un frasco, nos encargamos nosotros.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CIERRE EMOCIONAL ÉPICO -->
+    <section class="py-32 bg-noir text-white text-center relative overflow-hidden fade-up">
+        <!-- Luces volumétricas de fondo -->
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-tailored-royal/40 via-noir to-noir pointer-events-none"></div>
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-[50%] bg-tailored-accent/10 blur-[120px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto px-6 relative z-10 flex flex-col items-center">
+            <h2 class="text-4xl md:text-6xl lg:text-7xl font-black mb-8 leading-tight tracking-tight drop-shadow-2xl">
+                Algún día, alguien reconocerá tu llegada sin haberte visto todavía.
+            </h2>
+            
+            <div class="space-y-6 text-lg md:text-xl text-neutral-400 font-light leading-relaxed max-w-3xl mx-auto mb-14">
+                <p>
+                    La memoria olfativa es el instinto más primitivo del ser humano. Un buen traje se olvida, una conversación se desvanece, pero un aroma queda grabado en la mente para siempre.
+                </p>
+                <p>
+                    No dejes que tu firma personal sea una decisión tomada al azar en un pasillo de centro comercial. Permítenos diseñar la estela que hablará por ti, incluso mucho después de que te hayas ido. <span class="text-white font-bold">Ese día, habrás encontrado tu perfume.</span>
                 </p>
             </div>
-            <button onclick="openSommelierModal()"
-                class="relative z-10 px-8 py-4 rounded-full bg-white text-tailored-deep hover:bg-canvas-surface active:scale-95 font-extrabold text-sm uppercase tracking-wider transition-all duration-200 shadow-xl flex-shrink-0 flex items-center gap-3">
-                <span>Iniciar Sesión con el Sommelier</span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
+
+            <p class="text-sm md:text-base text-tailored-accent font-black mb-10 tracking-widest uppercase border-b border-tailored-accent/30 pb-2">
+                NO ELIJAS UN PERFUME. DESCUBRE EL TUYO.
+            </p>
+            
+            <button onclick="openSommelierModal()" class="group relative bg-white text-noir px-12 py-5 rounded-full font-black text-sm uppercase tracking-wider hover:bg-transparent hover:text-white border-2 border-white transition-all duration-300 active:scale-95 shadow-[0_0_50px_rgba(255,255,255,0.15)] mb-8 overflow-hidden">
+                <div class="absolute inset-0 bg-tailored-deep translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-300 z-0"></div>
+                <span class="relative z-10 flex items-center gap-2">
+                    INICIAR DIAGNÓSTICO AHORA
+                    <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </span>
             </button>
+            
+            <div class="flex items-center gap-4 text-xs text-neutral-500 font-medium">
+                <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Diagnóstico 100% Personalizado</span>
+                <span class="hidden sm:inline">•</span>
+                <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Atención 1 a 1</span>
+            </div>
         </div>
     </section>
 
-    <!-- FOOTER EDITORIAL -->
-    <footer class="border-t border-canvas-border py-12 px-4 sm:px-8 bg-canvas text-xs text-neutral-500">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div class="flex flex-col sm:flex-row items-center gap-3">
-                <span class="font-extrabold text-neutral-900 tracking-wider">TOUCHE ESSENCIELLE</span>
-                <span class="hidden sm:inline">•</span>
-                <span>Sincelejo, Sucre, Colombia</span>
-                <span class="hidden sm:inline">•</span>
-                <span>&copy; 2025. Todos los derechos reservados.</span>
+    <!-- FOOTER -->
+    <footer class="bg-noir border-t border-neutral-900 text-neutral-500 py-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-xs font-medium">
+            <div class="mb-6 md:mb-0 text-center md:text-left">
+                <span class="font-black text-white text-sm tracking-widest block mb-1 uppercase">Touche
+                    Essencielle</span>
+                Sincelejo · Sucre · Colombia <br> &copy; 2026. Todos los derechos reservados.
             </div>
-            <div class="flex items-center gap-6 font-semibold uppercase tracking-wider">
-                <a href="https://instagram.com/touchessencielle_" target="_blank" rel="noopener noreferrer"
-                    class="hover:text-tailored-accent transition-colors">INSTAGRAM</a>
-                <a href="#metodologia" class="hover:text-tailored-accent transition-colors">DIAGNÓSTICO</a>
-                <a href="https://wa.me/573145892537" target="_blank" rel="noopener noreferrer"
-                    class="hover:text-tailored-accent transition-colors">WHATSAPP DIRECTO</a>
+            <div class="flex flex-wrap justify-center gap-6 uppercase tracking-wider">
+                <a href="https://instagram.com/touchessencielle_" target="_blank"
+                    class="hover:text-white transition-colors">Instagram</a>
+                <a href="#diagnostico" class="hover:text-white transition-colors">Diagnóstico</a>
+                <a href="https://wa.me/573145892537" target="_blank"
+                    class="hover:text-white transition-colors">WhatsApp</a>
             </div>
         </div>
     </footer>
 
-    <!-- MODAL INMERSIVO -->
-    <div id="sommelier-modal"
-        class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-noir/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
-        <div class="relative w-full max-w-4xl h-[92vh] max-h-[850px] bg-canvas rounded-3xl shadow-2xl border border-canvas-border flex flex-col overflow-hidden transform scale-95 transition-all duration-300"
-            id="sommelier-modal-content">
-            <div class="px-6 py-4 border-b border-canvas-border flex items-center justify-between bg-white">
-                <h3 class="text-sm font-extrabold uppercase">Sommelier Privé</h3>
-                <button onclick="closeSommelierModal()"
-                    class="w-9 h-9 rounded-full bg-canvas-surface flex items-center justify-center font-bold">X</button>
+    <!-- MODAL FICHA TÉCNICA (Mini-Sommelier Nativo) -->
+    <div id="quick-rec-modal"
+        class="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-6 bg-noir/95 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+        <div class="relative w-full max-w-5xl bg-canvas rounded-[2rem] shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col max-h-[95vh]"
+            id="quick-rec-content">
+            <div
+                class="px-8 py-6 border-b border-canvas-border flex justify-between items-center bg-white sticky top-0 z-20">
+                <h2 class="text-2xl sm:text-3xl font-light tracking-wide text-noir uppercase"
+                    style="font-family: 'Times New Roman', serif;">Descripción Olfativa</h2>
+                <button onclick="closeQuickRec()"
+                    class="w-10 h-10 bg-canvas hover:bg-canvas-border rounded-full flex items-center justify-center text-noir font-black transition-colors">X</button>
             </div>
-            <div class="flex-grow w-full h-full bg-canvas relative">
-                <iframe id="sommelier-iframe" src="about:blank" data-src="https://touche-bot-v2.vercel.app/"
-                    class="w-full h-full border-0"></iframe>
+            <div class="p-4 sm:p-8 overflow-y-auto no-scrollbar flex-grow bg-white" id="quick-rec-body"></div>
+            <div class="p-4 sm:p-6 border-t border-canvas-border bg-canvas-surface sticky bottom-0 z-20"
+                id="quick-rec-footer"></div>
+        </div>
+    </div>
+
+    <!-- MODAL SOMMELIER (iframe) -->
+    <div id="bot-modal"
+        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-noir/95 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+        <div class="relative w-full max-w-4xl h-[90vh] bg-canvas rounded-[2.5rem] shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col"
+            id="bot-modal-content">
+            <div class="px-6 py-4 border-b border-canvas-border flex justify-between items-center bg-white">
+                <span class="font-black text-xs uppercase tracking-widest text-noir">Sommelier Touché</span>
+                <button onclick="closeSommelierModal()"
+                    class="w-8 h-8 bg-canvas hover:bg-canvas-border rounded-full flex items-center justify-center text-noir font-bold transition-colors">X</button>
+            </div>
+            <div class="flex-grow w-full relative">
+                <iframe src="https://touche-bot-v2.vercel.app/" class="w-full h-full border-0 absolute inset-0"
+                    title="Sommelier Touché"></iframe>
             </div>
         </div>
     </div>
 
+    <!-- BOTÓN FLOTANTE MÓVIL -->
+    <div class="fixed bottom-6 left-0 w-full px-6 md:hidden z-40 pointer-events-none flex justify-center">
+        <button onclick="openSommelierModal()"
+            class="w-full max-w-[300px] bg-noir text-white py-4 rounded-full font-black text-xs uppercase tracking-widest shadow-2xl pointer-events-auto active:scale-95 border border-neutral-800">
+            DESCUBRIR MI PERFUME
+        </button>
+    </div>
+
+    <!-- SCRIPT DE BASE DE DATOS EXTERNA -->
+    <script src="js/perfumesDB.js"></script>
+
+    <!-- SCRIPT DE MODALES Y LÓGICAS GENERALES -->
     <script>
-        const reviewsPool = [
-            { text: "La atención es increíble y la calidad de los perfumes 1:1 es la mejor de Sincelejo.", author: "Carlos M." },
-            { text: "Excelente asesoría. Me ayudaron a elegir según mi tipo de piel y el aroma no se desvanece.", author: "Andrea P." },
-            { text: "Los aceites tienen fijación extrema. La experiencia fue muy profesional.", author: "Luis F." },
-            { text: "La perfumería más exclusiva. Extractos súper concentrados y atención 1 a 1.", author: "Valeria G." }
-        ];
+        // MODALES (Sommelier)
+        const modalBot = document.getElementById('bot-modal');
+        const modalBotContent = document.getElementById('bot-modal-content');
+        const botIframe = document.querySelector('#bot-modal iframe');
 
-        function renderRandomReviews() {
-            const container = document.getElementById('dynamic-reviews-container');
-            const shuffled = [...reviewsPool].sort(() => 0.5 - Math.random()).slice(0, 2);
-            container.innerHTML = shuffled.map(item => `
-        <div class="bg-noir-card rounded-2xl p-6 border border-noir-border shadow-md">
-          <div class="text-amber-400 text-xs mb-2">★★★★★</div>
-          <p class="text-sm text-neutral-200 italic mb-4 font-light">“${item.text}”</p>
-          <span class="font-bold text-white text-xs">${item.author}</span>
-        </div>
-      `).join('');
-        }
-
-        const heroTrending = [
-            { title: "Naxos 1861", notes: "Miel silvestre, Tabaco dulce, Bergamota" },
-            { title: "Gris Charnel Extrait", notes: "Higo negro, Cardamomo, Sándalo" },
-            { title: "Baccarat Rouge 540", notes: "Jazmín, Azafrán, Ámbar gris" }
-        ];
-        let currentHeroIndex = 0;
-
-        function rotateHeroTrending() {
-            const content = document.getElementById('hero-carousel-content');
-            const dotsContainer = document.getElementById('hero-carousel-dots');
-            currentHeroIndex = (currentHeroIndex + 1) % heroTrending.length;
-            content.innerHTML = `<h4 class="text-sm font-bold text-neutral-900">${heroTrending[currentHeroIndex].title}</h4><p class="text-xs text-neutral-500">${heroTrending[currentHeroIndex].notes}</p>`;
-            dotsContainer.querySelectorAll('span').forEach((dot, idx) => dot.className = `w-1.5 h-1.5 rounded-full ${idx === currentHeroIndex ? 'bg-tailored-accent' : 'bg-neutral-300'} transition-all`);
-        }
+        const modalRec = document.getElementById('quick-rec-modal');
+        const modalRecContent = document.getElementById('quick-rec-content');
+        const bodyRec = document.getElementById('quick-rec-body');
+        const footerRec = document.getElementById('quick-rec-footer');
 
         function openSommelierModal() {
-            const m = document.getElementById('sommelier-modal'), c = document.getElementById('sommelier-modal-content'), i = document.getElementById('sommelier-iframe');
-            if (i.getAttribute('src') === 'about:blank') i.setAttribute('src', i.getAttribute('data-src'));
-            m.classList.replace('opacity-0', 'opacity-100'); m.classList.replace('pointer-events-none', 'pointer-events-auto');
-            c.classList.replace('scale-95', 'scale-100'); document.body.classList.add('overflow-hidden');
+            botIframe.src = "https://touche-bot-v2.vercel.app/";
+            modalBot.classList.remove('opacity-0', 'pointer-events-none');
+            modalBot.classList.add('opacity-100', 'pointer-events-auto');
+            modalBotContent.classList.remove('scale-95');
+            modalBotContent.classList.add('scale-100');
+            document.body.style.overflow = 'hidden';
         }
 
         function closeSommelierModal() {
-            const m = document.getElementById('sommelier-modal'), c = document.getElementById('sommelier-modal-content');
-            m.classList.replace('opacity-100', 'opacity-0'); m.classList.replace('pointer-events-auto', 'pointer-events-none');
-            c.classList.replace('scale-100', 'scale-95'); document.body.classList.remove('overflow-hidden');
+            modalBot.classList.remove('opacity-100', 'pointer-events-auto');
+            modalBot.classList.add('opacity-0', 'pointer-events-none');
+            modalBotContent.classList.remove('scale-100');
+            modalBotContent.classList.add('scale-95');
+            document.body.style.overflow = '';
+            setTimeout(() => { botIframe.src = ""; }, 300);
         }
 
+        // FICHA TÉCNICA Y CARRUSEL
+        let currentCategoryPool = [];
+        let filteredPool = [];
+        let currentIndex = 0;
+        let activeGender = 'mujer';
+
+        function openQuickRec(perfilId) {
+            if (typeof perfumesDB === 'undefined') {
+                bodyRec.innerHTML = `<div class="p-10 text-center font-bold text-red-500">Error cargando inventario.</div>`;
+                modalRec.classList.remove('opacity-0', 'pointer-events-none');
+                modalRec.classList.add('opacity-100', 'pointer-events-auto');
+                modalRecContent.classList.remove('scale-95');
+                modalRecContent.classList.add('scale-100');
+                return;
+            }
+
+            let pool = perfumesDB[perfilId] || [];
+            let shuffledPool = [...pool];
+            for (let i = shuffledPool.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledPool[i], shuffledPool[j]] = [shuffledPool[j], shuffledPool[i]];
+            }
+
+            currentCategoryPool = shuffledPool;
+            activeGender = 'mujer';
+            applyFilterAndRender();
+
+            modalRec.classList.remove('opacity-0', 'pointer-events-none');
+            modalRec.classList.add('opacity-100', 'pointer-events-auto');
+            modalRecContent.classList.remove('scale-95');
+            modalRecContent.classList.add('scale-100');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeQuickRec() {
+            modalRec.classList.remove('opacity-100', 'pointer-events-auto');
+            modalRec.classList.add('opacity-0', 'pointer-events-none');
+            modalRecContent.classList.remove('scale-100');
+            modalRecContent.classList.add('scale-95');
+            document.body.style.overflow = '';
+        }
+
+        function setGender(gender) {
+            activeGender = gender;
+            applyFilterAndRender();
+        }
+
+        function applyFilterAndRender() {
+            let genderFiltered = currentCategoryPool.filter(p => {
+                if (!p.gender) return false;
+                let g = p.gender.toLowerCase().trim();
+                return g === activeGender || g === 'unisex';
+            });
+
+            filteredPool = genderFiltered.slice(0, 6);
+            currentIndex = 0;
+            renderCurrentPerfume();
+        }
+
+        function nextPerfume() {
+            if (filteredPool.length === 0) return;
+            currentIndex = (currentIndex + 1) % filteredPool.length;
+            renderCurrentPerfume();
+        }
+
+        function prevPerfume() {
+            if (filteredPool.length === 0) return;
+            currentIndex = (currentIndex - 1 + filteredPool.length) % filteredPool.length;
+            renderCurrentPerfume();
+        }
+
+        function renderCurrentPerfume() {
+            const genderButtonsHTML = `
+                <div class="flex justify-center mb-8">
+                    <div class="bg-canvas border border-canvas-border p-1.5 rounded-full flex gap-1.5 text-[10px] sm:text-xs font-bold uppercase tracking-widest shadow-sm">
+                        <button onclick="setGender('mujer')" class="px-5 sm:px-8 py-2.5 rounded-full transition-all ${activeGender === 'mujer' ? 'bg-white text-noir shadow-md' : 'text-neutral-500 hover:bg-white/50'}">Para Mujer</button>
+                        <button onclick="setGender('hombre')" class="px-5 sm:px-8 py-2.5 rounded-full transition-all ${activeGender === 'hombre' ? 'bg-white text-noir shadow-md' : 'text-neutral-500 hover:bg-white/50'}">Para Hombre</button>
+                    </div>
+                </div>
+            `;
+
+            if (filteredPool.length === 0) {
+                bodyRec.innerHTML = genderButtonsHTML + `<div class="p-10 text-center text-neutral-500 font-bold uppercase tracking-widest leading-relaxed">No hay opciones disponibles.</div>`;
+                footerRec.innerHTML = '';
+                return;
+            }
+
+            const data = filteredPool[currentIndex];
+            let tableHTML = '';
+            if (data.details) {
+                data.details.forEach(item => {
+                    tableHTML += `
+                        <div class="flex items-start py-3.5 border-b border-gray-100 last:border-0 hover:bg-white/50 px-2 rounded-lg">
+                            <div class="w-1/3 sm:w-[35%] flex items-center gap-3 text-[10px] sm:text-[11px] font-black text-noir uppercase tracking-widest">
+                                <span class="text-base sm:text-lg">${item.i || '✨'}</span> ${item.l}
+                            </div>
+                            <div class="w-2/3 sm:w-[65%] text-sm text-neutral-600 font-medium pl-2">${item.v}</div>
+                        </div>
+                    `;
+                });
+            }
+
+            let visualGender = 'UNISEX';
+            let safeGender = data.gender ? data.gender.toLowerCase().trim() : '';
+            if (safeGender === 'hombre' || safeGender === 'masculino') visualGender = 'MASCULINO';
+            if (safeGender === 'mujer' || safeGender === 'femenino') visualGender = 'FEMENINO';
+
+            bodyRec.innerHTML = genderButtonsHTML + `
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+                    <div class="lg:col-span-5 flex flex-col">
+                        <div class="w-full aspect-[3/4] mb-4 rounded-3xl overflow-hidden border border-canvas-border relative group bg-canvas-surface flex items-center justify-center p-2">
+                            <img src="${data.img}" class="w-full h-full object-cover object-center rounded-2xl mix-blend-luminosity group-hover:mix-blend-normal transition-all duration-700">
+                            <div class="absolute top-6 left-6 bg-white/95 backdrop-blur text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full text-noir border border-canvas-border">${visualGender}</div>
+                        </div>
+                        <div class="flex items-center justify-between bg-canvas-surface border border-canvas-border rounded-full p-2 mb-6">
+                            <button onclick="prevPerfume()" class="w-10 h-10 rounded-full bg-white text-noir font-black shadow flex items-center justify-center">←</button>
+                            <span class="text-[10px] sm:text-xs font-bold text-neutral-500 uppercase tracking-widest">Opción ${currentIndex + 1} de ${filteredPool.length}</span>
+                            <button onclick="nextPerfume()" class="w-10 h-10 rounded-full bg-white text-noir font-black shadow flex items-center justify-center">→</button>
+                        </div>
+                        <h4 class="text-2xl font-black text-noir mb-4">${data.name}</h4>
+                        <div class="text-sm text-neutral-600">${data.desc || ''}</div>
+                    </div>
+                    <div class="lg:col-span-7 flex flex-col">
+                        <div class="bg-canvas-surface rounded-3xl p-6 sm:p-8 border border-canvas-border shadow-inner">${tableHTML}</div>
+                    </div>
+                </div>
+            `;
+
+            const generoBuscado = activeGender === 'hombre' ? 'para hombre' : 'para mujer';
+            const wpText = encodeURIComponent(`Hola! Vi la ficha de ${data.name} en la página. Me interesa muchísimo una fragancia ${generoBuscado}. ¿Tienen disponibilidad y qué precio tiene?`);
+            footerRec.innerHTML = `<a href="https://wa.me/573145892537?text=${wpText}" target="_blank" class="w-full max-w-md mx-auto bg-noir text-white py-4 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-neutral-800 transition-colors flex items-center justify-center gap-2 shadow-luxury"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>LO QUIERO · HABLAR CON ASESOR</a>`;
+        }
+
+        modalBot.addEventListener('click', e => { if (e.target === modalBot) closeSommelierModal(); });
+        modalRec.addEventListener('click', e => { if (e.target === modalRec) closeQuickRec(); });
+
+        // LABORATORIO OLFATIVO 3 COLUMNAS PRO
+        const optionsLeft = document.getElementById('options-left');
+        const optionsRight = document.getElementById('options-right');
+        const liquidFill = document.getElementById('liquid-fill');
+        const percentageText = document.getElementById('fill-percentage');
+        const glowEffect = document.getElementById('glow-effect');
+        const flareContainer = document.getElementById('flare-container');
+        const finalCard = document.getElementById('final-card');
+        const wpContainer = document.getElementById('whatsapp-btn-container');
+        const labQuestion = document.getElementById('lab-question');
+        const labPhaseBadge = document.getElementById('lab-phase-badge');
+
+        let currentPhase = 0;
+        let selectedIngredients = [];
+
+        const labData = [
+            { badge: "Fase 1: El Lienzo", question: "¿Para quién estamos diseñando?", options: ["Para Hombre", "Para Mujer", "Unisex"] },
+            { badge: "Fase 2: La Esencia", question: "¿Qué familia olfativa te atrae más?", options: ["Maderas & Cuero", "Dulces & Vainilla", "Cítricos Radiantes", "Flores Elegantes", "Acuáticos Frescos", "Especiados"] },
+            { badge: "Fase 3: El Escenario", question: "¿Cuándo usarás más este perfume?", options: ["Día a Día / Oficina", "Noches / Fiestas", "Citas Románticas", "Eventos Especiales"] },
+            { badge: "Fase 4: La Estela", question: "¿Cómo quieres que sea tu proyección?", options: ["Imponente (Dejar huella)", "Elegante (Discreta)", "Seductora (Íntima)", "Vibrante (Fresca)"] }
+        ];
+
+        function initLab() {
+            if (!optionsLeft) return;
+            currentPhase = 0;
+            selectedIngredients = [];
+            if (liquidFill) {
+                liquidFill.style.height = '0%';
+                liquidFill.style.background = '';
+            }
+            if (glowEffect) {
+                glowEffect.style.opacity = 0.4;
+                glowEffect.classList.remove('bg-emerald-500/20');
+                glowEffect.classList.add('bg-tailored-accent/20');
+            }
+            percentageText.innerText = '0';
+            finalCard.classList.remove('opacity-100', 'pointer-events-auto', 'scale-100');
+            finalCard.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+            optionsLeft.style.opacity = 1;
+            optionsRight.style.opacity = 1;
+            renderPhase();
+        }
+
+        function renderPhase() {
+            optionsLeft.innerHTML = '';
+            optionsRight.innerHTML = '';
+            labQuestion.style.opacity = 0;
+            labQuestion.style.transform = 'translateY(-10px)';
+
+            setTimeout(() => {
+                const data = labData[currentPhase];
+                labPhaseBadge.innerText = data.badge;
+                labQuestion.innerText = data.question;
+                labQuestion.style.opacity = 1;
+                labQuestion.style.transform = 'translateY(0)';
+
+                data.options.forEach((opt, index) => {
+                    const html = `
+                        <button onclick="catchIngredient('${opt}', event)" 
+                            class="relative overflow-hidden pointer-events-auto bg-white/5 backdrop-blur-xl border border-white/10 text-white text-[10px] md:text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-2xl hover:bg-white/10 hover:border-tailored-accent hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(109,40,217,0.3)] transition-all duration-300 shadow-lg text-center w-auto md:w-full md:max-w-[220px] group">
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
+                            <span class="relative z-10 flex items-center justify-center gap-2">
+                                <span class="text-tailored-accent opacity-70 group-hover:opacity-100 transition-opacity">+</span> ${opt}
+                            </span>
+                        </button>
+                    `;
+                    if (index % 2 === 0) optionsLeft.insertAdjacentHTML('beforeend', html);
+                    else optionsRight.insertAdjacentHTML('beforeend', html);
+                });
+                optionsLeft.style.opacity = 1;
+                optionsRight.style.opacity = 1;
+            }, 400);
+        }
+
+        function catchIngredient(optText, event) {
+            selectedIngredients.push(optText);
+            currentPhase++;
+
+            createFlare(event.clientX, event.clientY);
+
+            const progress = (currentPhase / labData.length) * 100;
+            if (liquidFill) {
+                liquidFill.style.transitionTimingFunction = "cubic-bezier(0.34, 1.56, 0.64, 1)";
+                liquidFill.style.height = progress + '%';
+            }
+            animateValue(percentageText, parseInt(percentageText.innerText), progress, 1200);
+
+            if (glowEffect) {
+                glowEffect.style.opacity = 0.8;
+                glowEffect.style.transform = 'translate(-50%, -50%) scale(' + (1 + (progress / 80)) + ')';
+                setTimeout(() => {
+                    glowEffect.style.opacity = (progress / 100) + 0.3;
+                    glowEffect.style.transform = 'translate(-50%, -50%) scale(' + (1 + (progress / 100)) + ')';
+                }, 500);
+            }
+
+            optionsLeft.style.opacity = 0;
+            optionsRight.style.opacity = 0;
+
+            if (currentPhase >= labData.length) setTimeout(showFinalCard, 800);
+            else setTimeout(renderPhase, 500);
+        }
+
+        function createFlare(x, y) {
+            if (!flareContainer) return;
+            const rect = flareContainer.getBoundingClientRect();
+            const relX = x - rect.left;
+            const relY = y - rect.top;
+
+            const flare = document.createElement('div');
+            flare.className = 'absolute rounded-full mix-blend-screen pointer-events-none transition-all ease-out';
+            flare.style.width = '10px'; flare.style.height = '10px';
+            flare.style.background = 'radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(168,85,247,0.8) 40%, rgba(109,40,217,0) 70%)';
+            flare.style.left = `${relX - 5}px`; flare.style.top = `${relY - 5}px`;
+            flare.style.opacity = '1'; flare.style.boxShadow = '0 0 40px 20px rgba(168,85,247,0.4)';
+            flare.style.transform = 'scale(1)'; flare.style.transitionDuration = '800ms';
+
+            flareContainer.appendChild(flare);
+
+            requestAnimationFrame(() => {
+                flare.style.transform = 'scale(15)';
+                flare.style.opacity = '0';
+            });
+
+            setTimeout(() => flare.remove(), 800);
+            for (let i = 0; i < 5; i++) createSparkle(relX, relY);
+        }
+
+        function createSparkle(x, y) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'absolute w-1 h-1 bg-white rounded-full pointer-events-none opacity-80';
+            sparkle.style.left = `${x}px`; sparkle.style.top = `${y}px`;
+            sparkle.style.boxShadow = '0 0 5px 2px rgba(255,255,255,0.8)';
+
+            const angle = Math.random() * Math.PI * 2;
+            const distance = Math.random() * 60 + 30;
+            const tx = Math.cos(angle) * distance;
+            const ty = Math.sin(angle) * distance - 20;
+
+            sparkle.style.transition = 'all 600ms cubic-bezier(0.25, 1, 0.5, 1)';
+            flareContainer.appendChild(sparkle);
+
+            requestAnimationFrame(() => {
+                sparkle.style.transform = `translate(${tx}px, ${ty}px) scale(0)`;
+                sparkle.style.opacity = '0';
+            });
+            setTimeout(() => sparkle.remove(), 600);
+        }
+
+        function showFinalCard() {
+            labQuestion.innerText = "¡Poción Creada!";
+            labPhaseBadge.innerText = "Análisis Completado";
+            if (liquidFill) {
+                liquidFill.classList.add('animate-pulse');
+                liquidFill.style.background = 'linear-gradient(to top, #059669, #10B981, #34D399)';
+            }
+            if (glowEffect) {
+                glowEffect.classList.remove('bg-tailored-accent/20');
+                glowEffect.classList.add('bg-emerald-500/20');
+            }
+
+            const wpMessage = encodeURIComponent(`*Hola Brian!* Hice la alquimia en la web y busco mi fragancia perfecta. Este es mi ADN:\n\n1. ${selectedIngredients[0]}\n2. ${selectedIngredients[1]}\n3. ${selectedIngredients[2]}\n4. ${selectedIngredients[3]}\n\n¿Qué perfume exclusivo tienes para este perfil?`);
+
+            wpContainer.innerHTML = `
+                <a href="https://wa.me/573145892537?text=${wpMessage}" target="_blank" class="w-full inline-flex items-center justify-center gap-3 bg-white text-noir py-4 rounded-full font-black text-xs md:text-sm uppercase tracking-widest hover:bg-neutral-200 transition-all active:scale-95 shadow-[0_10px_30px_rgba(255,255,255,0.2)] group">
+                    HABLAR CON EL SOMMELIER
+                    <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+            `;
+
+            finalCard.classList.remove('opacity-0', 'pointer-events-none', 'scale-95');
+            finalCard.classList.add('opacity-100', 'pointer-events-auto', 'scale-100');
+        }
+
+        function resetLab() { initLab(); }
+
+        // FUNCIONES COMPARTIDAS (CARRUSEL, SCROLL, ACORDEÓN)
+        function scrollReviews(direction) {
+            const carousel = document.getElementById('reviews-carousel');
+            if (!carousel) return;
+            const scrollAmount = carousel.clientWidth * 0.8;
+            if (direction === 'left') {
+                carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else {
+                carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        }
+
+        function animateValue(obj, start, end, duration) {
+            if (!obj) return;
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) window.requestAnimationFrame(step);
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // INICIALIZADORES AL CARGAR LA PÁGINA
         document.addEventListener('DOMContentLoaded', () => {
-            renderRandomReviews();
-            setInterval(rotateHeroTrending, 3500);
-            const observer = new IntersectionObserver((entries, obs) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }), { threshold: 0.12 });
-            document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+            // Iniciar animaciones de Scroll
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.fade-up').forEach(element => observer.observe(element));
+
+            // Iniciar Laboratorio
+            setTimeout(initLab, 300);
         });
+
+        // ACORDEÓN (FAQ)
+        function toggleAccordion(element) {
+            const content = element.nextElementSibling;
+            const icon = element.querySelector('.accordion-icon');
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                icon.classList.remove('open');
+            } else {
+                document.querySelectorAll('.accordion-content').forEach(el => el.classList.remove('open'));
+                document.querySelectorAll('.accordion-icon').forEach(el => el.classList.remove('open'));
+                content.classList.add('open');
+                icon.classList.add('open');
+            }
+        }
     </script>
 </body>
 
