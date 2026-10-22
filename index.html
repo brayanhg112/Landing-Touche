@@ -1811,12 +1811,13 @@
             const videoEl = document.getElementById('card-video');
             const imgFallback = document.getElementById('card-fallback-img');
             
-            // Detección de iOS / Safari
-            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-            const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+            // Detección agresiva para TODO el ecosistema Apple (iOS, Mac, Safari, y navegadores de terceros en iPhone)
+            const isApple = /Mac|iPod|iPhone|iPad/.test(navigator.platform) || 
+                            /Mac|iPod|iPhone|iPad/i.test(navigator.userAgent) || 
+                            /CriOS|FxiOS|EdgiOS|Brave/i.test(navigator.userAgent);
 
-            if (isIOS || isSafari) {
-                // Lógica para Apple: Ocultar video, mostrar GIF
+            if (isApple) {
+                // Lógica para Apple: Ocultar video, forzar GIF transparente
                 videoEl.classList.add('hidden');
                 imgFallback.classList.remove('hidden');
                 
@@ -1826,7 +1827,7 @@
                     imgFallback.style.opacity = 1;
                 }, 300);
             } else {
-                // Lógica normal para PC/Android: Mostrar video, ocultar GIF
+                // Lógica normal para PC/Android (Soporta WebM transparente)
                 imgFallback.classList.add('hidden');
                 videoEl.classList.remove('hidden');
                 
