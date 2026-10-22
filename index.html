@@ -216,8 +216,7 @@
     </style>
 </head>
 
-<body
-    class="bg-canvas text-neutral-900 font-sans antialiased selection:bg-tailored-accent selection:text-white relative min-h-screen overflow-x-hidden">
+<body class="overflow-x-hidden w-full bg-tailored-deep text-white font-sans antialiased">
 
     <!-- ═══ FLOATING GLASSMORPHISM NAVIGATION ═══ -->
     <header id="glass-header"
@@ -1306,7 +1305,7 @@
 
     <!-- MODAL FICHA TÉCNICA (Mini-Sommelier Nativo) -->
     <div id="quick-rec-modal"
-        class="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-6 bg-noir/95 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+        class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-6 bg-noir/95 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
         <div class="relative w-full max-w-5xl bg-canvas rounded-[2rem] shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col max-h-[95vh]"
             id="quick-rec-content">
             <div
@@ -1328,7 +1327,7 @@
 
     <!-- MODAL SOMMELIER (iframe) -->
     <div id="bot-modal"
-        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-noir/95 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+        class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-noir/95 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
         <div class="relative w-full max-w-4xl h-[90vh] bg-canvas rounded-[2.5rem] shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col"
             id="bot-modal-content">
             <div class="px-6 py-4 border-b border-canvas-border flex justify-between items-center bg-white">
@@ -1372,10 +1371,13 @@
 
         function openSommelierModal() {
             botIframe.src = "https://touche-bot-v2.vercel.app/";
-            modalBot.classList.remove('opacity-0', 'pointer-events-none');
-            modalBot.classList.add('opacity-100', 'pointer-events-auto');
-            modalBotContent.classList.remove('scale-95');
-            modalBotContent.classList.add('scale-100');
+            modalBot.classList.remove('hidden');
+            requestAnimationFrame(() => {
+                modalBot.classList.remove('opacity-0', 'pointer-events-none');
+                modalBot.classList.add('opacity-100', 'pointer-events-auto');
+                modalBotContent.classList.remove('scale-95');
+                modalBotContent.classList.add('scale-100');
+            });
             document.body.style.overflow = 'hidden';
         }
 
@@ -1385,7 +1387,10 @@
             modalBotContent.classList.remove('scale-100');
             modalBotContent.classList.add('scale-95');
             document.body.style.overflow = '';
-            setTimeout(() => { botIframe.src = ""; }, 300);
+            setTimeout(() => {
+                modalBot.classList.add('hidden');
+                botIframe.src = "";
+            }, 300);
         }
 
         // FICHA TÉCNICA Y CARRUSEL
@@ -1397,10 +1402,13 @@
         function openQuickRec(perfilId) {
             if (typeof perfumesDB === 'undefined') {
                 bodyRec.innerHTML = `<div class="p-10 text-center font-bold text-red-500">Error cargando inventario.</div>`;
-                modalRec.classList.remove('opacity-0', 'pointer-events-none');
-                modalRec.classList.add('opacity-100', 'pointer-events-auto');
-                modalRecContent.classList.remove('scale-95');
-                modalRecContent.classList.add('scale-100');
+                modalRec.classList.remove('hidden');
+                requestAnimationFrame(() => {
+                    modalRec.classList.remove('opacity-0', 'pointer-events-none');
+                    modalRec.classList.add('opacity-100', 'pointer-events-auto');
+                    modalRecContent.classList.remove('scale-95');
+                    modalRecContent.classList.add('scale-100');
+                });
                 return;
             }
 
@@ -1415,10 +1423,13 @@
             activeGender = 'mujer';
             applyFilterAndRender();
 
-            modalRec.classList.remove('opacity-0', 'pointer-events-none');
-            modalRec.classList.add('opacity-100', 'pointer-events-auto');
-            modalRecContent.classList.remove('scale-95');
-            modalRecContent.classList.add('scale-100');
+            modalRec.classList.remove('hidden');
+            requestAnimationFrame(() => {
+                modalRec.classList.remove('opacity-0', 'pointer-events-none');
+                modalRec.classList.add('opacity-100', 'pointer-events-auto');
+                modalRecContent.classList.remove('scale-95');
+                modalRecContent.classList.add('scale-100');
+            });
             document.body.style.overflow = 'hidden';
         }
 
@@ -1428,6 +1439,9 @@
             modalRecContent.classList.remove('scale-100');
             modalRecContent.classList.add('scale-95');
             document.body.style.overflow = '';
+            setTimeout(() => {
+                modalRec.classList.add('hidden');
+            }, 300);
         }
 
         function setGender(gender) {
