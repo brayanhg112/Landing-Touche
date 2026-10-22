@@ -337,9 +337,9 @@
                         <!-- Video ampliado sin filtros de color forzados -->
                         <video id="card-video" autoplay loop muted playsinline webkit-playsinline disablePictureInPicture class="relative z-10 w-full h-full object-contain scale-[1.15] drop-shadow-[0_15px_15px_rgba(0,0,0,0.5)] transition-opacity duration-500">
                             <source src="assets/30ml.webm" type="video/webm">
-                            <!-- Fallback para GIFs -->
-                            <img id="card-fallback-img" src="assets/30ml.gif" class="hidden w-full h-full object-contain scale-[1.15]" alt="Envase Touche">
                         </video>
+                        <!-- Fallback para GIFs en iOS / Safari -->
+                        <img id="card-fallback-img" src="assets/30ml.gif" class="hidden relative z-10 w-full h-full object-contain scale-[1.15] drop-shadow-[0_15px_15px_rgba(0,0,0,0.5)] transition-opacity duration-500" alt="Envase Touche">
                         
                         <!-- Sombra ajustada (Margen negativo para pegarla a la base) -->
                         <div class="w-32 h-3.5 bg-black/70 blur-md rounded-[100%] relative z-0 -mt-10 mb-4 transition-all"></div>
@@ -1808,23 +1808,36 @@
             const waUrl = `https://wa.me/573145892537?text=Hola,%20me%20gustar%C3%ADa%20adquirir%20un%20perfume%20en%20el%20tama%C3%B1o%20${encodeURIComponent(data.wa)}.`;
             document.getElementById('card-wa').href = waUrl;
 
-            // Lógica para cambiar el video con un efecto de transición suave
             const videoEl = document.getElementById('card-video');
-            videoEl.style.opacity = 0; // Fade out
+            const imgFallback = document.getElementById('card-fallback-img');
             
-            setTimeout(() => {
-                videoEl.src = data.media;
-                videoEl.setAttribute('playsinline', '');
-                videoEl.setAttribute('webkit-playsinline', '');
-                
-                // Si el usuario guardó los archivos como .gif en lugar de .webm, cambiar src del fallback
-                const imgFallback = document.getElementById('card-fallback-img');
-                if(imgFallback) imgFallback.src = data.media.replace('.webm', '.gif');
+            // Detección de iOS / Safari
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-                videoEl.load();
-                videoEl.play().catch(e => console.log("Autoplay prevenido. Mostrando fallback.", e));
-                videoEl.style.opacity = 1; // Fade in
-            }, 300);
+            if (isIOS || isSafari) {
+                // Lógica para Apple: Ocultar video, mostrar GIF
+                videoEl.classList.add('hidden');
+                imgFallback.classList.remove('hidden');
+                
+                imgFallback.style.opacity = 0;
+                setTimeout(() => {
+                    imgFallback.src = data.media.replace('.webm', '.gif');
+                    imgFallback.style.opacity = 1;
+                }, 300);
+            } else {
+                // Lógica normal para PC/Android: Mostrar video, ocultar GIF
+                imgFallback.classList.add('hidden');
+                videoEl.classList.remove('hidden');
+                
+                videoEl.style.opacity = 0;
+                setTimeout(() => {
+                    videoEl.src = data.media;
+                    videoEl.load();
+                    videoEl.play().catch(e => console.log("Autoplay prevenido."));
+                    videoEl.style.opacity = 1;
+                }, 300);
+            }
         }
 
         function prevSize() {
@@ -1836,6 +1849,9 @@
             currentSizeIndex = (currentSizeIndex + 1) % menuSizes.length;
             updateVitrinaCard();
         }
+
+        // Ejecución inicial para aplicar detección en iOS / Safari desde el primer render
+        updateVitrinaCard();
     </script>
 </body>
 
