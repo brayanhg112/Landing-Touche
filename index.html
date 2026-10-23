@@ -328,20 +328,16 @@
 
                     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-56 h-56 bg-tailored-accent/20 rounded-full blur-[60px] pointer-events-none transition-colors duration-700"></div>
 
-                    <!-- Contenedor Visual (Video 3D Dinámico) -->
+                    <!-- Contenedor Visual (GIF 3D Universal) -->
                     <div class="relative w-full h-[380px] z-10 flex flex-col justify-center items-center mt-2">
                         
-                        <!-- Backlight (Luz trasera para el cristal) -->
+                        <!-- Backlight para resaltar el cristal -->
                         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-48 bg-white/20 rounded-full blur-[50px] pointer-events-none z-0"></div>
 
-                        <!-- Video ampliado sin filtros de color forzados -->
-                        <video id="card-video" autoplay loop muted playsinline webkit-playsinline disablePictureInPicture class="relative z-10 w-full h-full object-contain scale-[1.15] drop-shadow-[0_15px_15px_rgba(0,0,0,0.5)] transition-opacity duration-500">
-                            <source src="assets/30ml.webm" type="video/webm">
-                        </video>
-                        <!-- Fallback para GIFs en iOS / Safari -->
-                        <img id="card-fallback-img" src="assets/30ml.gif" class="hidden relative z-10 w-full h-full object-contain scale-[1.15] drop-shadow-[0_15px_15px_rgba(0,0,0,0.5)] transition-opacity duration-500" alt="Envase Touche">
+                        <!-- Imagen GIF principal -->
+                        <img id="card-img" src="assets/30ml.gif" class="relative z-10 w-full h-full object-contain scale-[1.15] drop-shadow-[0_15px_15px_rgba(0,0,0,0.5)] transition-opacity duration-500" alt="Envase Touche">
                         
-                        <!-- Sombra ajustada (Margen negativo para pegarla a la base) -->
+                        <!-- Sombra base imantada -->
                         <div class="w-32 h-3.5 bg-black/70 blur-md rounded-[100%] relative z-0 -mt-10 mb-4 transition-all"></div>
                     </div>
 
@@ -1786,14 +1782,14 @@
     </script>
 
     <script>
-        // Lógica del Slider de la Vitrina con Video 3D
+        // Lógica del Slider de la Vitrina con GIF 3D Universal
         const menuSizes = [
-            { type: "DECANT (BOLSILLO)", name: "Discovery 5ml", desc: "Presentación en vidrio • Ideal para probar", price: "$3.000 COP", wa: "Decant Discovery de 5ml por $3.000", media: "assets/5ml.webm" },
-            { type: "DECANT (BOLSILLO)", name: "Daily 7ml", desc: "Envase plástico • Llévalo a todas partes", price: "$5.000 COP", wa: "Decant Daily de 7ml por $5.000", media: "assets/7ml.webm" },
-            { type: "DECANT (BOLSILLO)", name: "Pro 10ml", desc: "Envase en vidrio • Perfecto para viajes", price: "$8.000 COP", wa: "Decant Pro de 10ml por $8.000", media: "assets/10ml.webm" },
-            { type: "FRASCO DE COLECCIÓN", name: "Personal 30ml", desc: "Máximo nivel de detalle • Duración y Estela", price: "$14.000 COP", wa: "Frasco Personal de 30ml por $14.000", media: "assets/30ml.webm" },
-            { type: "FRASCO DE COLECCIÓN", name: "Premium 50ml", desc: "Línea 1.1 Alta Calidad • Presencia diaria", price: "$25.000 COP", wa: "Frasco Premium de 50ml por $25.000", media: "assets/50ml.webm" },
-            { type: "FRASCO DE COLECCIÓN", name: "Signature 100ml", desc: "Tu firma olfativa • Tamaño definitivo", price: "$55.000 COP", wa: "Frasco Signature de 100ml por $55.000", media: "assets/100ml.webm" }
+            { type: "DECANT (BOLSILLO)", name: "Discovery 5ml", desc: "Presentación en vidrio • Ideal para probar", price: "$3.000 COP", wa: "Decant Discovery de 5ml por $3.000", media: "assets/5ml.gif" },
+            { type: "DECANT (BOLSILLO)", name: "Daily 7ml", desc: "Envase plástico • Llévalo a todas partes", price: "$5.000 COP", wa: "Decant Daily de 7ml por $5.000", media: "assets/7ml.gif" },
+            { type: "DECANT (BOLSILLO)", name: "Pro 10ml", desc: "Envase en vidrio • Perfecto para viajes", price: "$8.000 COP", wa: "Decant Pro de 10ml por $8.000", media: "assets/10ml.gif" },
+            { type: "FRASCO DE COLECCIÓN", name: "Personal 30ml", desc: "Máximo nivel de detalle • Duración y Estela", price: "$14.000 COP", wa: "Frasco Personal de 30ml por $14.000", media: "assets/30ml.gif" },
+            { type: "FRASCO DE COLECCIÓN", name: "Premium 50ml", desc: "Línea 1.1 Alta Calidad • Presencia diaria", price: "$25.000 COP", wa: "Frasco Premium de 50ml por $25.000", media: "assets/50ml.gif" },
+            { type: "FRASCO DE COLECCIÓN", name: "Signature 100ml", desc: "Tu firma olfativa • Tamaño definitivo", price: "$55.000 COP", wa: "Frasco Signature de 100ml por $55.000", media: "assets/100ml.gif" }
         ];
         
         let currentSizeIndex = 3; // Inicia en Personal 30ml
@@ -1808,37 +1804,14 @@
             const waUrl = `https://wa.me/573145892537?text=Hola,%20me%20gustar%C3%ADa%20adquirir%20un%20perfume%20en%20el%20tama%C3%B1o%20${encodeURIComponent(data.wa)}.`;
             document.getElementById('card-wa').href = waUrl;
 
-            const videoEl = document.getElementById('card-video');
-            const imgFallback = document.getElementById('card-fallback-img');
+            const imgEl = document.getElementById('card-img');
             
-            // Detección agresiva para TODO el ecosistema Apple (iOS, Mac, Safari, y navegadores de terceros en iPhone)
-            const isApple = /Mac|iPod|iPhone|iPad/.test(navigator.platform) || 
-                            /Mac|iPod|iPhone|iPad/i.test(navigator.userAgent) || 
-                            /CriOS|FxiOS|EdgiOS|Brave/i.test(navigator.userAgent);
-
-            if (isApple) {
-                // Lógica para Apple: Ocultar video, forzar GIF transparente
-                videoEl.classList.add('hidden');
-                imgFallback.classList.remove('hidden');
-                
-                imgFallback.style.opacity = 0;
-                setTimeout(() => {
-                    imgFallback.src = data.media.replace('.webm', '.gif');
-                    imgFallback.style.opacity = 1;
-                }, 300);
-            } else {
-                // Lógica normal para PC/Android (Soporta WebM transparente)
-                imgFallback.classList.add('hidden');
-                videoEl.classList.remove('hidden');
-                
-                videoEl.style.opacity = 0;
-                setTimeout(() => {
-                    videoEl.src = data.media;
-                    videoEl.load();
-                    videoEl.play().catch(e => console.log("Autoplay prevenido."));
-                    videoEl.style.opacity = 1;
-                }, 300);
-            }
+            // Transición de opacidad suave
+            imgEl.style.opacity = 0;
+            setTimeout(() => {
+                imgEl.src = data.media;
+                imgEl.style.opacity = 1;
+            }, 300);
         }
 
         function prevSize() {
