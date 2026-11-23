@@ -289,6 +289,10 @@ void main() {
 
     if (!canRunWebGL()) {
       renderFallback(container);
+      const reason = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        ? 'reduced-motion'
+        : 'sin WebGL2 / GPU baja';
+      console.info('[Touche Visual] Liquid Logo: Fallback PNG |', reason);
       return;
     }
 
@@ -306,8 +310,15 @@ void main() {
       const ok = initGL(container, img);
       if (!ok) {
         renderFallback(container);
+        console.info('[Touche Visual] Liquid Logo: Fallback PNG | initGL falló');
         return;
       }
+
+      // Fix 3 — Console info para DevTools
+      const isMob = window.innerWidth < 768;
+      console.info(
+        `[Touche Visual] Liquid Logo: WebGL2 activo | ${isMob ? 'mobile' : 'desktop'} | dpr=${Math.min(window.devicePixelRatio||1, isMob?1.5:2.0).toFixed(1)} | canvas ${canvas.width}×${canvas.height}px`
+      );
 
       // Mouse tracking: coordenadas normalizadas relativas al canvas
       document.addEventListener('mousemove', function (e) {
