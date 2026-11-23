@@ -466,8 +466,14 @@
                 <!-- COLUMNA IZQUIERDA: Textos y CTA -->
                 <div class="col-span-1 lg:col-span-7 flex flex-col items-start text-left text-white fade-up">
                     <div class="flex items-center mb-6 sm:mb-8" data-aos="fade-down" data-aos-delay="200">
-                        <img src="assets/logo-hero.gif" alt="Logo Animado"
-                            class="w-16 h-auto md:w-20 object-contain opacity-90 mr-4">
+                        <!-- LIQUID LOGO: canvas WebGL2 inyectado por liquid-logo.js -->
+                        <!-- Fallback noscript + navegadores sin WebGL2 -->
+                        <div id="liquid-logo-hero" class="flex-shrink-0 mr-4" style="min-width:64px;min-height:64px;" aria-hidden="true">
+                            <noscript>
+                                <img src="assets/logo-navbar.png" alt="Touche Essencielle"
+                                    class="h-16 md:h-20 w-auto object-contain opacity-90">
+                            </noscript>
+                        </div>
                         <div
                             class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[10px] font-bold uppercase tracking-wider shadow-lg">
                             <span
@@ -531,7 +537,7 @@
 
                 <!-- COLUMNA DERECHA: Vitrina Interactiva con Slider -->
                 <div class="col-span-1 lg:col-span-5 flex justify-center lg:justify-end relative z-30 perspective-1000">
-                    <div
+                    <div id="vitrina-card"
                         class="bg-white/10 backdrop-blur-2xl border border-white/20 p-6 sm:p-8 rounded-[2rem] shadow-floating w-full max-w-[360px] flex flex-col items-center relative overflow-hidden group">
 
                         <!-- Controles del Slider (Flechas) -->
@@ -703,14 +709,14 @@
                     <span class="fade-up block">Encontrar un perfume que huela bien&nbsp;es&nbsp;fácil.</span>
                     <span class="fade-up block text-tailored-light" style="transition-delay: 200ms;">Encontrar uno que
                         se
-                        sienta como tú <span class="text-tailored-accent">es&nbsp;otra&nbsp;historia.</span></span>
+                        sienta como tú <span class="gold-shimmer-text font-heading not-italic">es&nbsp;otra&nbsp;historia.</span></span>
                 </h2>
                 <p class="fade-up text-lg md:text-xl text-neutral-400 font-light leading-relaxed mb-12 max-w-4xl mx-auto"
                     style="transition-delay: 400ms;">
                     Has comprado perfumes por moda, solo para descubrir que en tu piel cambian, desaparecen rápido o
                     simplemente no dicen nada de ti. Elegir una fragancia por popularidad es dejar una decisión personal
                     al
-                    azar. <strong class="text-white font-semibold tracking-wide">Tu presencia merece más que una
+                    azar. <strong class="shimmer-text font-semibold tracking-wide">Tu presencia merece más que una
                         tendencia.</strong>
                 </p>
                 <div class="fade-up" style="transition-delay: 600ms;">
@@ -2159,6 +2165,13 @@
             });
         }
     </script>
+
+    <!-- ═══ VISUAL UPGRADE 1.1 — Efectos de Alto Impacto ═══ -->
+    <!-- Efecto 1: Metal Líquido en el Logo Hero (WebGL2 nativo) -->
+    <script src="js/liquid-logo.js" defer></script>
+
+    <!-- Efecto 2: Vidrio Líquido en Navbar + Vitrina + Cards (SVG filter estático + CSS GPU) -->
+    <script src="js/liquid-glass.js" defer></script>
 </body>
 
 </html>
