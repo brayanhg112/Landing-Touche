@@ -1,0 +1,5 @@
+# robots.txt — Touche Essencielle
+User-agent: *
+Allow: /
+
+Sitemap: https://touchessencielle.com/sitemap.xml
